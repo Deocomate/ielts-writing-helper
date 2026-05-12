@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kết quả thi — IELTS Type & Learn</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'app-bg': '#F9F9FA',
+            'surface': '#FFFFFF',
+            'border-light': '#E1E4E8',
+            'text-primary': '#0E101A',
+            'text-secondary': '#6D758D',
+            'text-disabled': '#B9BDC5',
+            'brand': '#11A683',
+            'brand-dark': '#0E8A6D',
+            'brand-light': '#E8F8F3',
+            'semantic-red': '#FF5E5E',
+            'semantic-blue': '#007AFF',
+            'semantic-green': '#11A683',
+            'semantic-purple': '#8F00FF',
+            'semantic-yellow': '#FFD500',
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
+          },
+          boxShadow: {
+            'card': '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)',
+            'float': '0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.1)',
+            'tooltip': '0 8px 24px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #0E101A;
+      background-color: #F9F9FA;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
+
+    .underline-grammar{border-bottom:2.5px solid #FF5E5E;}
+    .underline-coherence{border-bottom:2.5px solid #007AFF;}
+    .underline-lexical{border-bottom:2.5px solid #11A683;}
+    .score-bar-fill{transition:width 1.2s cubic-bezier(0.16,1,0.3,1);border-radius:99px;height:8px;}
+    .comment-chip{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;}
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .score-bar-fill { transition: none; }
+    }
+  </style>
+</head>
+<body class="bg-app-bg min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-white border-b border-border-light sticky top-0 z-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
+      <div class="flex items-center gap-3">
+        <a href="/learning/lesson-library" class="text-text-disabled hover:text-text-secondary">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </a>
+        <div>
+          <p class="text-xs font-semibold text-orange-500">Kết quả thi thử</p>
+          <p class="text-sm font-bold text-text-primary">CO₂ Emissions in Europe 1990–2020</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="px-3 py-1.5 border border-border-light text-xs font-medium text-text-secondary rounded-lg hover:bg-app-bg cursor-pointer">Tải PDF</button>
+        <a href="/learning/mock-exam-intro" class="px-3 py-1.5 bg-brand text-white text-xs font-semibold rounded-lg hover:bg-brand-dark cursor-pointer">Thi lại</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+
+    <!-- Band hero -->
+    <div class="bg-white rounded-2xl border border-border-light p-6 mb-6 flex flex-col sm:flex-row items-center gap-6">
+      <div class="flex-shrink-0">
+        <div class="w-28 h-28 rounded-full border-[6px] border-brand bg-brand-light flex flex-col items-center justify-center">
+          <p class="text-4xl font-black text-brand leading-none">7.0</p>
+          <p class="text-xs font-bold text-brand mt-1">Band</p>
+        </div>
+      </div>
+      <div class="flex-1 text-center sm:text-left">
+        <h1 class="text-2xl font-black text-text-primary">Good</h1>
+        <p class="text-sm text-text-secondary mt-1">Đây là band IELTS của bài thi thử này. Kết quả có thể chênh lệch ±0.5 so với thi thật.</p>
+        <div class="flex flex-wrap gap-2 mt-3 justify-center sm:justify-start">
+          <span class="comment-chip bg-brand-light text-brand"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Overview rõ ràng</span>
+          <span class="comment-chip bg-blue-50 text-blue-600"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.172 13.828a4 4 0 015.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg> Cần đa dạng linkers</span>
+          <span class="comment-chip bg-red-50 text-semantic-red"><svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg> 2 lỗi grammar</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 flex-shrink-0">
+        <div class="text-center px-3 py-2 bg-app-bg rounded-xl">
+          <p class="text-xl font-black text-text-primary">7.5</p>
+          <p class="text-xs text-text-disabled mt-0.5">TR</p>
+        </div>
+        <div class="text-center px-3 py-2 bg-app-bg rounded-xl">
+          <p class="text-xl font-black text-text-primary">6.5</p>
+          <p class="text-xs text-text-disabled mt-0.5">CC</p>
+        </div>
+        <div class="text-center px-3 py-2 bg-app-bg rounded-xl">
+          <p class="text-xl font-black text-text-primary">7.0</p>
+          <p class="text-xs text-text-disabled mt-0.5">LR</p>
+        </div>
+        <div class="text-center px-3 py-2 bg-app-bg rounded-xl">
+          <p class="text-xl font-black text-text-primary">7.0</p>
+          <p class="text-xs text-text-disabled mt-0.5">GRA</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-6">
+
+      <!-- Left: Detailed scores -->
+      <div class="space-y-4">
+        <!-- TR -->
+        <div class="bg-white rounded-xl border border-border-light p-5">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-brand"></div>
+              <h3 class="font-semibold text-sm text-text-primary">Task Response (TR)</h3>
+            </div>
+            <span class="text-lg font-black text-text-primary">7.5</span>
+          </div>
+          <div class="w-full bg-app-bg rounded-full h-2 mb-3">
+            <div class="score-bar-fill bg-brand" style="width:83%"></div>
+          </div>
+          <p class="text-xs text-text-secondary">Bài trả lời đầy đủ nhiệm vụ Task 1. Overview truyền tải được xu hướng chính, tuy nhiên cần cụ thể hơn một số data points trong Body.</p>
+        </div>
+        <!-- CC -->
+        <div class="bg-white rounded-xl border border-border-light p-5">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-semantic-blue"></div><h3 class="font-semibold text-sm text-text-primary">Coherence & Cohesion (CC)</h3></div>
+            <span class="text-lg font-black text-text-primary">6.5</span>
+          </div>
+          <div class="w-full bg-app-bg rounded-full h-2 mb-3"><div class="score-bar-fill bg-semantic-blue" style="width:72%"></div></div>
+          <p class="text-xs text-text-secondary">Có sử dụng linking words nhưng bị lặp lại “furthermore” 3 lần. Thử các từ thay thế: In addition, Moreover, Additionally.</p>
+        </div>
+        <!-- LR -->
+        <div class="bg-white rounded-xl border border-border-light p-5">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-semantic-green"></div><h3 class="font-semibold text-sm text-text-primary">Lexical Resource (LR)</h3></div>
+            <span class="text-lg font-black text-text-primary">7.0</span>
+          </div>
+          <div class="w-full bg-app-bg rounded-full h-2 mb-3"><div class="score-bar-fill bg-semantic-green" style="width:77%"></div></div>
+          <p class="text-xs text-text-secondary">Từ vựng khá phong phú. Ghi nhìn sử dụng “approximately” và “notably”. Có thể cải thiện độ chính xác thêu số liệu.</p>
+        </div>
+        <!-- GRA -->
+        <div class="bg-white rounded-xl border border-border-light p-5">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-semantic-purple"></div><h3 class="font-semibold text-sm text-text-primary">Grammatical Range & Accuracy</h3></div>
+            <span class="text-lg font-black text-text-primary">7.0</span>
+          </div>
+          <div class="w-full bg-app-bg rounded-full h-2 mb-3"><div class="score-bar-fill bg-semantic-purple" style="width:77%"></div></div>
+          <p class="text-xs text-text-secondary">Phần lớn câu chính xác. Phát hiện 2 lỗi: “through out” (sai chính tả) và “rose up” (thừa “up” vì rose đã là qúy đước lên).</p>
+        </div>
+      </div>
+
+      <!-- Right: Annotated essay -->
+      <div class="bg-white rounded-xl border border-border-light p-5">
+        <h3 class="font-semibold text-sm text-text-primary mb-4">Bài viết của bạn (có chú thích)</h3>
+        <div class="text-sm leading-8 text-text-secondary space-y-3">
+          <p>The line graph shows CO₂ emissions per capita in five European countries from 1990 to 2020. Overall, all nations experienced a downward trend, with Sweden consistently having the lowest figures.</p>
+          <p>In 1990, the UK recorded approximately 10 tonnes per capita, the highest in the group. Germany followed closely at 9.5 tonnes, while France and Italy were both around 7 tonnes. Sweden <span class="underline-grammar" title="rose up: thừa 'up'">rose up</span> to only 6 tonnes, suggesting it was already the cleanest emitter.</p>
+          <p>By 2020, all countries had reduced their output significantly. Germany showed the most dramatic fall — dropping by roughly 5 tonnes. The UK declined to around 5 tonnes. France, Italy and Sweden <span class="underline-coherence">furthermore</span> recorded lower figures at approximately 4–5 tonnes each. The overall range <span class="underline-grammar">narrowed considerable</span>, reflecting widespread policy success.</p>
+        </div>
+        <!-- Error list -->
+        <div class="mt-4 pt-4 border-t border-border-light space-y-2">
+          <p class="text-xs font-semibold text-text-primary mb-2">Lỗi được phát hiện</p>
+          <div class="flex items-start gap-2 p-2.5 bg-red-50 rounded-lg">
+            <svg class="w-4 h-4 text-semantic-red flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+            <div>
+              <p class="text-xs font-semibold text-semantic-red">Grammar: "rose up"</p>
+              <p class="text-xs text-text-secondary">Sửa: <em>rose</em> (không cần "up" vì "rose" đã mang nghĩa đi lên)</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-2 p-2.5 bg-red-50 rounded-lg">
+            <svg class="w-4 h-4 text-semantic-red flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+            <div>
+              <p class="text-xs font-semibold text-semantic-red">Grammar: “narrowed considerable”</p>
+              <p class="text-xs text-text-secondary">Sửa: <em>narrowed considerably</em> (cần dùng trạng từ)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-6 bg-gradient-to-r from-brand to-brand-dark rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="text-white">
+        <p class="font-bold text-white"><svg class="w-4 h-4 inline-block mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/></svg>Giờ chép bài mẫu để cải thiện!</p>
+        <p class="text-sm opacity-80 mt-0.5">Học từ bài đạt Band 7.5 cùng chủ đề này.</p>
+      </div>
+      <a href="/learning/study-dictation" class="flex-shrink-0 px-5 py-2.5 bg-white text-brand font-bold text-sm rounded-xl hover:bg-brand-light transition-colors cursor-pointer">Chép bài mẫu Band 7.5</a>
+    </div>
+  </main>
+</body>
+</html>

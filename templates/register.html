@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng ký — IELTS Type & Learn</title>
+  <meta name="description" content="Tạo tài khoản miễn phí để bắt đầu luyện IELTS Writing ngay hôm nay." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand': '#11A683','brand-dark': '#0D8A6B','brand-light': '#E8F7F3',
+            'text-primary': '#0E101A','text-secondary': '#6D758D','text-disabled': '#B9BDC5',
+            'border-light': '#E1E4E8','app-bg': '#F9F9FA',
+          },
+          fontFamily: { sans: ['Inter', 'Roboto', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'] },
+          boxShadow: { 'card': '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)', 'float': '0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.1)' },
+        },
+      },
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; color: #0E101A; -webkit-font-smoothing: antialiased; }
+    .input-field:focus { border-color: #11A683; box-shadow: 0 0 0 3px rgba(17,166,131,0.15); outline: none; }
+    .pw-strength-bar { height: 4px; border-radius: 2px; transition: width 0.3s, background-color 0.3s; }
+  </style>
+</head>
+<body class="min-h-screen bg-app-bg flex flex-col">
+
+  <header class="py-5 px-6 flex items-center justify-between max-w-7xl mx-auto w-full">
+    <a href="/" class="flex items-center gap-2 group">
+      <div class="w-8 h-8 bg-brand rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+      </div>
+      <span class="text-base font-semibold text-text-primary">IELTS Type & Learn</span>
+    </a>
+    <p class="text-sm text-text-secondary">Đã có tài khoản? <a href="/login" class="text-brand font-semibold hover:text-brand-dark transition-colors">Đăng nhập</a></p>
+  </header>
+
+  <main class="flex-1 flex items-center justify-center px-4 py-10">
+    <div class="w-full max-w-md">
+      <div class="bg-white rounded-2xl shadow-float border border-border-light p-8">
+        <div class="text-center mb-8">
+          <h1 class="text-2xl font-bold text-text-primary">Tạo tài khoản miễn phí</h1>
+          <p class="mt-2 text-sm text-text-secondary">Bắt đầu chép chính tả bài mẫu đầu tiên trong vòng 30 giây.</p>
+        </div>
+
+        <div class="space-y-3 mb-6">
+          <button class="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white border border-border-light rounded-lg text-sm font-medium text-text-primary hover:bg-app-bg transition-colors cursor-pointer">
+            <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Tiếp tục với Google
+          </button>
+        </div>
+
+        <div class="relative mb-6">
+          <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-border-light"></div></div>
+          <div class="relative flex justify-center text-xs"><span class="px-3 bg-white text-text-disabled">hoặc đăng ký bằng email</span></div>
+        </div>
+
+        <form class="space-y-4" novalidate>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="first-name" class="block text-sm font-medium text-text-primary mb-1.5">Họ</label>
+              <input id="first-name" type="text" placeholder="Nguyễn" class="input-field w-full px-4 py-3 bg-app-bg border border-border-light rounded-lg text-sm text-text-primary placeholder-text-disabled transition-all" />
+            </div>
+            <div>
+              <label for="last-name" class="block text-sm font-medium text-text-primary mb-1.5">Tên</label>
+              <input id="last-name" type="text" placeholder="Văn A" class="input-field w-full px-4 py-3 bg-app-bg border border-border-light rounded-lg text-sm text-text-primary placeholder-text-disabled transition-all" />
+            </div>
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-text-primary mb-1.5">Email</label>
+            <input id="email" type="email" autocomplete="email" placeholder="you@example.com" class="input-field w-full px-4 py-3 bg-app-bg border border-border-light rounded-lg text-sm text-text-primary placeholder-text-disabled transition-all" />
+          </div>
+          <div>
+            <label for="password" class="block text-sm font-medium text-text-primary mb-1.5">Mật khẩu</label>
+            <div class="relative">
+              <input id="password" type="password" autocomplete="new-password" placeholder="Tối thiểu 8 ký tự" class="input-field w-full px-4 py-3 bg-app-bg border border-border-light rounded-lg text-sm text-text-primary placeholder-text-disabled transition-all pr-11" />
+              <button type="button" id="toggle-pw" class="absolute right-3 top-1/2 -translate-y-1/2 text-text-disabled hover:text-text-secondary cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              </button>
+            </div>
+            <!-- Strength bar -->
+            <div class="mt-2 flex gap-1">
+              <div id="s1" class="pw-strength-bar flex-1 bg-border-light"></div>
+              <div id="s2" class="pw-strength-bar flex-1 bg-border-light"></div>
+              <div id="s3" class="pw-strength-bar flex-1 bg-border-light"></div>
+              <div id="s4" class="pw-strength-bar flex-1 bg-border-light"></div>
+            </div>
+            <p id="pw-hint" class="text-xs text-text-disabled mt-1">Mật khẩu cần tối thiểu 8 ký tự</p>
+          </div>
+
+          <!-- Terms checkbox -->
+          <div class="flex items-start gap-2 pt-1">
+            <input id="terms" type="checkbox" class="w-4 h-4 mt-0.5 rounded border-border-light cursor-pointer accent-brand" />
+            <label for="terms" class="text-sm text-text-secondary cursor-pointer leading-relaxed">
+              Tôi đồng ý với <a href="/terms" class="text-brand hover:text-brand-dark transition-colors">Điều khoản dịch vụ</a> và <a href="/privacy" class="text-brand hover:text-brand-dark transition-colors">Chính sách bảo mật</a>
+            </label>
+          </div>
+
+          <button type="submit" class="w-full py-3 px-4 bg-brand text-white text-sm font-semibold rounded-lg hover:bg-brand-dark transition-colors cursor-pointer">
+            Tạo tài khoản miễn phí
+          </button>
+        </form>
+
+        <!-- Free plan benefits -->
+        <div class="mt-6 pt-6 border-t border-border-light">
+          <p class="text-xs font-medium text-text-secondary mb-3">Tài khoản Free bao gồm:</p>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-xs text-text-secondary"><svg class="w-4 h-4 text-brand flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> 10 bài mẫu chép chính tả miễn phí</li>
+            <li class="flex items-center gap-2 text-xs text-text-secondary"><svg class="w-4 h-4 text-brand flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Xem phân tích cơ bản bài mẫu Band 6.5 - 7.0</li>
+            <li class="flex items-center gap-2 text-xs text-text-secondary"><svg class="w-4 h-4 text-brand flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Theo dõi tiến độ học tập</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('toggle-pw').addEventListener('click', function() {
+      const pw = document.getElementById('password');
+      pw.type = pw.type === 'password' ? 'text' : 'password';
+    });
+    document.getElementById('password').addEventListener('input', function() {
+      const val = this.value;
+      const strength = [val.length >= 8, /[A-Z]/.test(val), /[0-9]/.test(val), /[^A-Za-z0-9]/.test(val)];
+      const score = strength.filter(Boolean).length;
+      const colors = ['', '#FF5E5E', '#FFD500', '#11A683', '#11A683'];
+      const hints = ['', 'Quá yếu', 'Trung bình', 'Khá mạnh', 'Mạnh'];
+      [1,2,3,4].forEach(i => {
+        const el = document.getElementById('s' + i);
+        el.style.backgroundColor = i <= score ? colors[score] : '#E1E4E8';
+      });
+      document.getElementById('pw-hint').textContent = val.length === 0 ? 'Mật khẩu cần tối thiểu 8 ký tự' : hints[score];
+      document.getElementById('pw-hint').style.color = val.length === 0 ? '#B9BDC5' : colors[score];
+    });
+  </script>
+</body>
+</html>

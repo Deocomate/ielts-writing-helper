@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phòng thi — IELTS Type & Learn</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'app-bg': '#F9F9FA',
+            'surface': '#FFFFFF',
+            'border-light': '#E1E4E8',
+            'text-primary': '#0E101A',
+            'text-secondary': '#6D758D',
+            'text-disabled': '#B9BDC5',
+            'brand': '#11A683',
+            'brand-dark': '#0E8A6D',
+            'brand-light': '#E8F8F3',
+            'semantic-red': '#FF5E5E',
+            'semantic-blue': '#007AFF',
+            'semantic-green': '#11A683',
+            'semantic-purple': '#8F00FF',
+            'semantic-yellow': '#FFD500',
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
+          },
+          boxShadow: {
+            'card': '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)',
+            'float': '0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.1)',
+            'tooltip': '0 8px 24px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #0E101A;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    #essayInput{resize:none;}
+    #essayInput:focus{outline:none;}
+    .timer-warn{animation:pulse 1s ease-in-out infinite;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.6;}}
+    .modal-overlay{display:none;} .modal-overlay.show{display:flex;}
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .timer-warn { animation: none; }
+    }
+  </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden bg-white">
+
+  <!-- Exam top bar -->
+  <header class="border-b border-border-light flex-shrink-0">
+    <div class="px-4 sm:px-6 flex items-center justify-between h-14">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 bg-brand rounded-lg flex items-center justify-center"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></div>
+        <div>
+          <p class="text-xs text-text-disabled">IELTS Writing Task 1</p>
+          <p class="text-sm font-semibold text-text-primary">CO₂ Emissions in Europe 1990–2020</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <!-- Word count -->
+        <div class="text-center">
+          <p class="text-base font-bold text-text-primary" id="wordCount">0</p>
+          <p class="text-xs text-text-disabled">Từ</p>
+        </div>
+        <!-- Timer -->
+        <div id="timerBlock" class="flex items-center gap-1.5 px-3 py-1.5 bg-app-bg border border-border-light rounded-xl">
+          <svg class="w-4 h-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span id="timerDisplay" class="font-mono font-bold text-text-primary text-sm">40:00</span>
+        </div>
+        <button onclick="openSubmitModal()" class="px-4 py-2 bg-brand text-white text-sm font-bold rounded-xl hover:bg-brand-dark transition-colors cursor-pointer">Nộp bài</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Split-screen content -->
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- Left: Prompt -->
+    <div class="w-2/5 xl:w-1/3 border-r border-border-light overflow-y-auto flex-shrink-0 bg-white">
+      <div class="p-6">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="px-2 py-0.5 bg-brand-light text-brand text-xs font-semibold rounded">Task 1</span>
+          <span class="px-2 py-0.5 bg-app-bg text-text-secondary text-xs rounded">40 phút • 150+ từ</span>
+        </div>
+        <p class="text-sm font-semibold text-text-primary mb-3">The graph below shows the CO₂ emissions per capita in five European countries from 1990 to 2020.</p>
+        <p class="text-sm text-text-secondary mb-4">Summarise the information by selecting and reporting the main features, and make comparisons where relevant.</p>
+
+        <!-- Chart image placeholder -->
+        <div class="w-full aspect-video bg-app-bg border border-border-light rounded-xl flex flex-col items-center justify-center mb-4">
+          <svg class="w-16 h-16 text-text-disabled opacity-40 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          <p class="text-xs text-text-disabled">Hình biểu đồ</p>
+          <!-- Simulated mini bar chart -->
+          <div class="mt-4 flex items-end gap-2 px-6">
+            <div class="flex flex-col items-center gap-1"><div class="w-6 bg-brand rounded-t" style="height:60px"></div><span class="text-xs text-text-disabled">UK</span></div>
+            <div class="flex flex-col items-center gap-1"><div class="w-6 bg-blue-400 rounded-t" style="height:50px"></div><span class="text-xs text-text-disabled">DE</span></div>
+            <div class="flex flex-col items-center gap-1"><div class="w-6 bg-purple-400 rounded-t" style="height:38px"></div><span class="text-xs text-text-disabled">FR</span></div>
+            <div class="flex flex-col items-center gap-1"><div class="w-6 bg-orange-400 rounded-t" style="height:35px"></div><span class="text-xs text-text-disabled">IT</span></div>
+            <div class="flex flex-col items-center gap-1"><div class="w-6 bg-green-400 rounded-t" style="height:22px"></div><span class="text-xs text-text-disabled">SE</span></div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-3">
+          <p class="text-xs text-yellow-800"><svg class="w-3.5 h-3.5 inline-block text-yellow-600 mr-1 -mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>Viết ít nhất <strong>150 từ</strong>. Bài dưới 150 từ sẽ bị trừ điểm.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Essay editor -->
+    <div class="flex-1 flex flex-col overflow-hidden bg-white">
+      <div class="px-6 pt-5 flex items-center justify-between border-b border-border-light pb-3">
+        <p class="text-sm font-semibold text-text-primary">Bài viết của bạn</p>
+        <div class="flex items-center gap-2">
+          <span id="wordHint" class="text-xs text-text-disabled">0 / 150+ từ</span>
+        </div>
+      </div>
+      <textarea
+        id="essayInput"
+        class="flex-1 w-full px-6 pt-4 pb-6 text-sm leading-8 text-text-primary border-0 focus:ring-0"
+        placeholder="Bắt đầu viết bài luận của bạn tại đây...
+
+Gợi ý cấu trúc Task 1:
+1. Introduction — paraphrase câu hỏi
+2. Overview — xu hướng chính
+3. Body 1 — dữ liệu nổi bật
+4. Body 2 — so sánh / chi tiết"
+        spellcheck="true"
+      ></textarea>
+      <!-- Word count bar -->
+      <div class="px-6 py-3 border-t border-border-light flex items-center gap-3">
+        <div class="flex-1 bg-app-bg rounded-full h-1.5">
+          <div id="wordCountBar" class="h-full bg-brand/40 rounded-full transition-all" style="width:0%"></div>
+        </div>
+        <span class="text-xs text-text-disabled">Tối thiểu 150 từ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit confirm modal -->
+  <div id="submitModal" class="modal-overlay fixed inset-0 z-50 bg-black/40 items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-sm shadow-float p-6">
+      <div class="text-center mb-5">
+        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        </div>
+        <h2 class="font-bold text-text-primary">Nộp bài?</h2>
+        <p class="text-sm text-text-secondary mt-1">Bước này không thể hoàn tác. Bài sẽ được chấm bằng AI.</p>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="closeSubmitModal()" class="flex-1 py-2.5 border border-border-light text-sm font-medium text-text-secondary rounded-xl hover:bg-app-bg transition-colors cursor-pointer">Huỷ</button>
+        <a href="/learning/mock-exam-report" class="flex-1 py-2.5 bg-brand text-white text-sm font-bold rounded-xl hover:bg-brand-dark transition-colors cursor-pointer text-center">Xác nhận nộp</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const essay = document.getElementById('essayInput');
+    const wordCount = document.getElementById('wordCount');
+    const wordHint = document.getElementById('wordHint');
+    const wordCountBar = document.getElementById('wordCountBar');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const timerBlock = document.getElementById('timerBlock');
+    let totalSeconds = 40 * 60;
+    let interval;
+
+    // Timer
+    function startTimer() {
+      interval = setInterval(()=>{
+        totalSeconds--;
+        if (totalSeconds <= 0) { clearInterval(interval); openSubmitModal(); return; }
+        const m = Math.floor(totalSeconds/60).toString().padStart(2,'0');
+        const s = (totalSeconds%60).toString().padStart(2,'0');
+        timerDisplay.textContent = m+':'+s;
+        if (totalSeconds <= 300) timerBlock.classList.add('timer-warn');
+      }, 1000);
+    }
+    startTimer();
+
+    // Word count
+    essay.addEventListener('input', function(){
+      const words = this.value.trim().split(/\s+/).filter(w=>w.length>0);
+      const wc = words.length;
+      wordCount.textContent = wc;
+      wordHint.textContent = wc + ' / 150+ t\u1eeb';
+      wordHint.className = wc >= 150 ? 'text-xs text-brand font-semibold' : 'text-xs text-text-disabled';
+      wordCountBar.style.width = Math.min(100, Math.round(wc/150*100))+'%';
+      wordCountBar.className = wc >= 150
+        ? 'h-full bg-brand rounded-full transition-all'
+        : 'h-full bg-brand/40 rounded-full transition-all';
+    });
+
+    function openSubmitModal(){ document.getElementById('submitModal').classList.add('show'); }
+    function closeSubmitModal(){ document.getElementById('submitModal').classList.remove('show'); }
+    document.getElementById('submitModal').addEventListener('click',function(e){if(e.target===this)closeSubmitModal();});
+  </script>
+</body>
+</html>

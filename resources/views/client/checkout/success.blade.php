@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanh toán thành công — IELTS Type & Learn</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{'brand':'#11A683','brand-dark':'#0E8A6D','brand-light':'#E8F8F3','text-primary':'#0E101A','text-secondary':'#6D758D','text-disabled':'#B9BDC5','border-light':'#E1E4E8','app-bg':'#F9F9FA'},fontFamily:{sans:['Inter','Roboto','sans-serif']},boxShadow:{'float':'0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.1)'}}}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body{font-family:'Inter',sans-serif;color:#0E101A;-webkit-font-smoothing:antialiased;}
+    @keyframes confetti-fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+    .confetti{position:fixed;top:0;pointer-events:none;animation:confetti-fall linear forwards;}
+  </style>
+</head>
+<body class="bg-app-bg min-h-screen flex flex-col">
+
+  <div id="confettiContainer"></div>
+
+  <nav class="bg-white border-b border-border-light">
+    <div class="max-w-xl mx-auto px-4 flex items-center justify-center h-14">
+      <a href="{{ route('client.dashboard') }}" class="flex items-center gap-2">
+        <div class="w-7 h-7 bg-brand rounded-lg flex items-center justify-center"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></div>
+        <span class="font-bold text-sm text-text-primary">IELTS Type & Learn</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="flex-1 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl border border-border-light shadow-float w-full max-w-md px-8 py-10 text-center">
+      <div class="w-20 h-20 bg-brand-light rounded-full flex items-center justify-center mx-auto mb-5 relative">
+        <svg class="w-10 h-10 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        <div class="absolute inset-0 rounded-full border-4 border-brand/30 animate-ping"></div>
+      </div>
+
+      <h1 class="text-2xl font-black text-text-primary">Thanh toán thành công!</h1>
+      <p class="text-sm text-text-secondary mt-2">Chào mừng bạn đến với <strong class="text-brand">IELTS Type & Learn Pro</strong>. Tài khoản của bạn đã được nâng cấp.</p>
+
+      <div class="mt-5 p-4 bg-app-bg rounded-xl text-left space-y-2">
+        <div class="flex justify-between text-sm">
+          <span class="text-text-secondary">Đơn hàng</span>
+          <span class="font-semibold text-text-primary">#{{ $transaction->transaction_code }}</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-text-secondary">Gói</span>
+          <span class="font-semibold text-text-primary">{{ $transaction->plan->name ?? 'Pro' }} — {{ $transaction->plan->duration_days ?? 30 }} ngày</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-text-secondary">Số tiền</span>
+          <span class="font-semibold text-text-primary">{{ number_format($transaction->amount, 0, ',', '.') }}đ</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-text-secondary">Ngày thanh toán</span>
+          <span class="font-semibold text-text-primary">{{ $transaction->created_at->format('d/m/Y') }}</span>
+        </div>
+      </div>
+
+      <p class="text-xs text-text-disabled mt-3">Biên lai đã gửi tới email của bạn.</p>
+
+      <a href="{{ route('client.lessons.library') }}" class="mt-6 flex items-center justify-center gap-2 w-full py-3 bg-brand text-white font-bold rounded-xl hover:bg-brand-dark transition-colors cursor-pointer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        Khám phá bài học Pro ngay!
+      </a>
+      <a href="{{ route('client.dashboard') }}" class="mt-2 block text-sm text-text-secondary hover:text-text-primary cursor-pointer">Về Dashboard</a>
+    </div>
+  </main>
+
+  <script>
+    const container = document.getElementById('confettiContainer');
+    const colors = ['#11A683','#FFD500','#007AFF','#FF5E5E','#8F00FF'];
+    for (let i = 0; i < 40; i++) {
+      const el = document.createElement('div');
+      el.className = 'confetti';
+      el.style.cssText = 'left:'+Math.random()*100+'vw;width:'+(6+Math.random()*8)+'px;height:'+(6+Math.random()*8)+'px;background:'+colors[Math.floor(Math.random()*colors.length)]+';border-radius:'+(Math.random()>0.5?'50%':'2px')+';animation-duration:'+(2+Math.random()*3)+'s;animation-delay:'+Math.random()*2+'s;';
+      container.appendChild(el);
+    }
+  </script>
+</body>
+</html>

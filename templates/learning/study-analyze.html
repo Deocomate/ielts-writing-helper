@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đọc & Phân tích — IELTS Type & Learn</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'app-bg': '#F9F9FA',
+            'surface': '#FFFFFF',
+            'border-light': '#E1E4E8',
+            'text-primary': '#0E101A',
+            'text-secondary': '#6D758D',
+            'text-disabled': '#B9BDC5',
+            'brand': '#11A683',
+            'brand-dark': '#0E8A6D',
+            'brand-light': '#E8F8F3',
+            'semantic-red': '#FF5E5E',
+            'semantic-blue': '#007AFF',
+            'semantic-green': '#11A683',
+            'semantic-purple': '#8F00FF',
+            'semantic-yellow': '#FFD500',
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
+          },
+          boxShadow: {
+            'card': '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)',
+            'float': '0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.1)',
+            'tooltip': '0 8px 24px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #0E101A;
+      background-color: #F9F9FA;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
+
+    /* Annotation underlines */
+    .underline-grammar{border-bottom:2.5px solid #FF5E5E;cursor:pointer;position:relative;}
+    .underline-coherence{border-bottom:2.5px solid #007AFF;cursor:pointer;position:relative;}
+    .underline-lexical{border-bottom:2.5px solid #11A683;cursor:pointer;position:relative;}
+    .underline-gra{border-bottom:2.5px solid #8F00FF;cursor:pointer;position:relative;}
+    /* Tooltip */
+    .tooltip-card {
+      display: none;
+      position: absolute;
+      z-index: 30;
+      bottom: calc(100% + 10px);
+      left: 0;
+      width: 260px;
+      background: #FFFFFF;
+      color: #0E101A;
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08);
+      border: 1px solid #E1E4E8;
+      font-size: 12px;
+      line-height: 1.6;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+    }
+    .tooltip-card::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 16px;
+      border: 6px solid transparent;
+      border-top-color: #FFFFFF;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05));
+    }
+    [class*="underline-"]:hover .tooltip-card {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    /* Legend pill */
+    .legend-pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid transparent;}
+    .legend-pill.active{border-color:currentColor;}
+    /* Score bar */
+    .score-bar-fill {
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 99px;
+      height: 6px;
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .tooltip-card { transition: none; }
+      .score-bar-fill { transition: none; }
+      .legend-pill { transition: none; }
+    }
+  </style>
+</head>
+<body class="bg-app-bg h-screen flex flex-col overflow-hidden">
+
+  <!-- Navbar -->
+  <nav class="bg-white border-b border-border-light flex-shrink-0">
+    <div class="px-4 sm:px-6 flex items-center justify-between h-14">
+      <div class="flex items-center gap-3">
+        <a href="/learning/lesson-library" class="text-text-disabled hover:text-text-secondary">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </a>
+        <div>
+          <p class="text-xs font-semibold text-blue-500">Đọc & Phân tích</p>
+          <p class="text-sm font-bold text-text-primary">CO₂ Emissions in Europe 1990–2020</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="hidden sm:inline px-2.5 py-1 bg-brand-light text-brand text-xs font-bold rounded-lg">Band 7.5</span>
+        <a href="/learning/study-dictation" class="px-3 py-1.5 border border-border-light text-xs font-medium text-text-secondary rounded-lg hover:bg-app-bg transition-colors cursor-pointer">Chép lại</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main split layout -->
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- Left: annotated essay -->
+    <div class="flex-1 overflow-y-auto">
+      <div class="max-w-2xl mx-auto px-6 py-8">
+        <!-- Legend -->
+        <div class="flex flex-wrap items-center gap-2 mb-6">
+          <span class="text-xs text-text-disabled font-medium mr-1">Chú thích:</span>
+          <span class="legend-pill" style="color:#FF5E5E;background:#FFF0F0">Grammar</span>
+          <span class="legend-pill" style="color:#007AFF;background:#F0F5FF">Coherence</span>
+          <span class="legend-pill" style="color:#11A683;background:#E8F8F3">Lexical</span>
+          <span class="legend-pill" style="color:#8F00FF;background:#F5F0FF">Grammatical Range</span>
+        </div>
+
+        <!-- Essay body -->
+        <div class="text-[15px] leading-9 text-text-primary space-y-4">
+          <p>
+            The line graph
+            <span class="underline-lexical">
+              illustrates
+              <span class="tooltip-card">
+                <span class="flex items-center gap-1.5 text-brand font-semibold mb-1"><span class="w-2 h-2 rounded-full bg-brand inline-block flex-shrink-0"></span>Lexical Resource</span>
+                <strong>illustrates</strong> — Lựa chọn từ vựng xuất sắc! Dùng động từ sinh động hơn &ldquo;shows&rdquo; dù đơn giản hơn.
+              </span>
+            </span>
+            CO₂ emissions per capita across five European countries — the UK, Germany, France, Italy and Sweden — from 1990 to 2020.
+          </p>
+          <p>
+            Overall, all five countries experienced a
+            <span class="underline-lexical">
+              downward trend
+              <span class="tooltip-card">
+                <span class="flex items-center gap-1.5 text-brand font-semibold mb-1"><span class="w-2 h-2 rounded-full bg-brand inline-block flex-shrink-0"></span>Lexical Resource</span>
+                <strong>downward trend</strong> — Đây là collocation chuẩn cho IELTS Task 1. Band 7+ ổn định.
+              </span>
+            </span>
+            over the period, with Sweden
+            <span class="underline-coherence">
+              consistently
+              <span class="tooltip-card">
+                <span class="flex items-center gap-1.5 text-semantic-blue font-semibold mb-1"><span class="w-2 h-2 rounded-full bg-semantic-blue inline-block flex-shrink-0"></span>Coherence & Cohesion</span>
+                <strong>consistently</strong> — Adverb giúp liên kết luận điểm tốt. Tăng điểm C&C rõ rệt.
+              </span>
+            </span>
+            recording the lowest emissions
+            <span class="underline-grammar">
+              through out
+              <span class="tooltip-card">
+                <span class="flex items-center gap-1.5 text-semantic-red font-semibold mb-1"><span class="w-2 h-2 rounded-full bg-semantic-red inline-block flex-shrink-0"></span>Grammar Error</span>
+                <strong>through out</strong> — Viết liền: <em class="text-brand">throughout</em> (một từ duy nhất).
+              </span>
+            </span>.
+          </p>
+          <p>
+            In 1990, the UK emitted
+            <span class="underline-lexical">
+              approximately
+              <span class="tooltip-card">
+                <span class="flex items-center gap-1.5 text-brand font-semibold mb-1"><span class="w-2 h-2 rounded-full bg-brand inline-block flex-shrink-0"></span>Lexical Resource</span>
+                <strong>approximately</strong> — Được ưa chuộng hơn &ldquo;about&rdquo; trong văn học thuật.
+              </span>
+            </span>
+            10 tonnes per capita, the highest of the group, followed
+            <span class="underline-coherence">
+              closely
+              <span class="tooltip-card">
+                <span class="flex items-center gap-1.5 text-semantic-blue font-semibold mb-1"><span class="w-2 h-2 rounded-full bg-semantic-blue inline-block flex-shrink-0"></span>Coherence & Cohesion</span>
+                &ldquo;followed closely by&rdquo; — Cấu trúc so sánh mượt mà. Hiệu quả C&C cao.
+              </span>
+            </span>
+            by Germany at 9.5 tonnes.
+          </p>
+          <p>
+            By 2020, emissions across all nations had
+            <span class="underline-gra">
+              converged
+              <span class="tooltip-card">
+                <span class="flex items-center gap-1.5 font-semibold mb-1" style="color:#8F00FF"><span class="w-2 h-2 rounded-full inline-block flex-shrink-0" style="background:#8F00FF"></span>Grammatical Range</span>
+                <strong>had converged</strong> — Past perfect tạo chiều sâu thời gian. Điểm GRA lên cao.
+              </span>
+            </span>
+            to a narrower range of 4–7 tonnes. The most notable drop was in Germany, which
+            <span class="underline-gra">
+              fell by roughly 5 tonnes
+              <span class="tooltip-card">
+                <span class="flex items-center gap-1.5 font-semibold mb-1" style="color:#8F00FF"><span class="w-2 h-2 rounded-full inline-block flex-shrink-0" style="background:#8F00FF"></span>Grammatical Range</span>
+                Relative clause &ldquo;which fell by&rdquo; — Thêm variety cho cấu trúc câu. Tuyệt vời!
+              </span>
+            </span>
+            over three decades.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Score sidebar -->
+    <div class="hidden lg:flex flex-col w-72 xl:w-80 border-l border-border-light bg-white overflow-y-auto flex-shrink-0">
+      <div class="p-5">
+        <!-- Overall band -->
+        <div class="text-center mb-5">
+          <div class="w-24 h-24 rounded-full border-4 border-brand bg-brand-light flex flex-col items-center justify-center mx-auto">
+            <p class="text-3xl font-black text-brand">7.5</p>
+            <p class="text-xs font-semibold text-brand">Band</p>
+          </div>
+          <p class="text-sm font-semibold text-text-primary mt-3">Very Good</p>
+          <p class="text-xs text-text-secondary mt-0.5">Top 15% trong thư viện</p>
+        </div>
+
+        <!-- 4 criteria -->
+        <div class="space-y-4">
+          <!-- TR -->
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-brand"></span>
+                <span class="text-xs font-semibold text-text-primary">Task Response</span>
+              </div>
+              <span class="text-sm font-bold text-text-primary">8.0</span>
+            </div>
+            <div class="w-full bg-app-bg rounded-full h-1.5">
+              <div class="score-bar-fill bg-brand" style="width:88%"></div>
+            </div>
+            <p class="text-xs text-text-secondary mt-1">Bài hoàn toàn trả lời nhiệm vụ đề bài, có một đoạn Overview rõ ràng.</p>
+          </div>
+          <!-- CC -->
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-semantic-blue"></span>
+                <span class="text-xs font-semibold text-text-primary">Coherence & Cohesion</span>
+              </div>
+              <span class="text-sm font-bold text-text-primary">7.0</span>
+            </div>
+            <div class="w-full bg-app-bg rounded-full h-1.5">
+              <div class="score-bar-fill bg-semantic-blue" style="width:77%"></div>
+            </div>
+            <p class="text-xs text-text-secondary mt-1">Liền kết tốt nhưng có thể đa dạng linkers hơn.</p>
+          </div>
+          <!-- LR -->
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-semantic-green"></span>
+                <span class="text-xs font-semibold text-text-primary">Lexical Resource</span>
+              </div>
+              <span class="text-sm font-bold text-text-primary">8.0</span>
+            </div>
+            <div class="w-full bg-app-bg rounded-full h-1.5">
+              <div class="score-bar-fill bg-semantic-green" style="width:88%"></div>
+            </div>
+            <p class="text-xs text-text-secondary mt-1">Từ vựng phong phú, ít lỗi chính tả. Xuất sắc!</p>
+          </div>
+          <!-- GRA -->
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-semantic-purple"></span>
+                <span class="text-xs font-semibold text-text-primary">Grammatical Range</span>
+              </div>
+              <span class="text-sm font-bold text-text-primary">7.0</span>
+            </div>
+            <div class="w-full bg-app-bg rounded-full h-1.5">
+              <div class="score-bar-fill bg-semantic-purple" style="width:77%"></div>
+            </div>
+            <p class="text-xs text-text-secondary mt-1">Có 1 lỗi through out. Cần chú ý hơn.</p>
+          </div>
+        </div>
+
+        <!-- Vocab saved -->
+        <div class="mt-5 pt-5 border-t border-border-light">
+          <p class="text-xs font-semibold text-text-primary mb-2">Từ vựng được đề xuất lưu</p>
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between px-3 py-2 bg-app-bg rounded-lg">
+              <span class="text-xs font-medium text-text-primary">illustrates</span>
+              <button class="text-brand hover:text-brand-dark cursor-pointer">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              </button>
+            </div>
+            <div class="flex items-center justify-between px-3 py-2 bg-app-bg rounded-lg">
+              <span class="text-xs font-medium text-text-primary">converged</span>
+              <button class="text-brand hover:text-brand-dark cursor-pointer"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
+            </div>
+            <div class="flex items-center justify-between px-3 py-2 bg-brand-light rounded-lg">
+              <span class="text-xs font-medium text-brand">downward trend</span>
+              <svg class="w-3.5 h-3.5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

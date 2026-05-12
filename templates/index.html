@@ -1,0 +1,1371 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IELTS Type & Learn — Luyện Writing thông minh với AI</title>
+  <meta name="description" content="Nền tảng luyện IELTS Writing toàn diện: Chép chính tả, Phân tích bài mẫu phong cách Grammarly, và Thi thử chấm điểm bằng AI." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'app-bg': '#F9F9FA',
+            'surface': '#FFFFFF',
+            'border-light': '#E1E4E8',
+            'text-primary': '#0E101A',
+            'text-secondary': '#6D758D',
+            'text-disabled': '#B9BDC5',
+            'brand': '#11A683',
+            'brand-dark': '#0E8A6D',
+            'brand-light': '#E8F8F3',
+            'semantic-red': '#FF5E5E',
+            'semantic-blue': '#007AFF',
+            'semantic-green': '#11A683',
+            'semantic-purple': '#8F00FF',
+            'semantic-yellow': '#FFD500',
+          },
+          fontFamily: {
+            sans: ['Inter', 'Roboto', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+          },
+          boxShadow: {
+            'card': '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)',
+            'card-hover': '0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.1)',
+            'float': '0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.1)',
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-out forwards',
+            'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+            'slide-in-left': 'slideInLeft 0.6s ease-out forwards',
+            'slide-in-right': 'slideInRight 0.6s ease-out forwards',
+            'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
+            'typing-cursor': 'blink 1s step-end infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            slideInLeft: {
+              '0%': { opacity: '0', transform: 'translateX(-32px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            slideInRight: {
+              '0%': { opacity: '0', transform: 'translateX(32px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            pulseSoft: {
+              '0%, 100%': { opacity: '1' },
+              '50%': { opacity: '0.7' },
+            },
+            blink: {
+              '0%, 100%': { opacity: '1' },
+              '50%': { opacity: '0' },
+            },
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== Base Styles ===== */
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #0E101A;
+      background-color: #F9F9FA;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ===== Semantic Underlines (Grammarly-style) ===== */
+    .underline-grammar {
+      border-bottom: 2px solid #FF5E5E;
+      padding-bottom: 1px;
+      cursor: pointer;
+    }
+    .underline-coherence {
+      border-bottom: 2px solid #007AFF;
+      padding-bottom: 1px;
+      cursor: pointer;
+    }
+    .underline-lexical {
+      border-bottom: 2px solid #11A683;
+      padding-bottom: 1px;
+      cursor: pointer;
+    }
+    .underline-gra {
+      border-bottom: 2px solid #8F00FF;
+      padding-bottom: 1px;
+      cursor: pointer;
+    }
+
+    /* ===== Wavy underline SVG ===== */
+    .underline-wavy {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='3' viewBox='0 0 6 3'%3E%3Cpath d='M0 2.5 Q1.5 0 3 2.5 Q4.5 5 6 2.5' fill='none' stroke='%23FF5E5E' stroke-width='1'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-position: bottom;
+      background-size: 6px 3px;
+      padding-bottom: 3px;
+    }
+
+    /* ===== Tooltip ===== */
+    .tooltip-card {
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.1);
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    /* ===== Typing Demo ===== */
+    .typing-char-correct { color: #11A683; }
+    .typing-char-wrong { color: #FF5E5E; background: rgba(255,94,94,0.08); border-radius: 2px; }
+    .typing-char-pending { color: #B9BDC5; }
+    .typing-cursor-line {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background: #0E101A;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+
+    /* ===== Scroll Reveal ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== Navbar Blur ===== */
+    .navbar-blur {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.85);
+    }
+
+    /* ===== Feature Card Hover ===== */
+    .feature-card {
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .feature-card:hover {
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.1);
+      transform: translateY(-4px);
+    }
+
+    /* ===== Band Score Pill ===== */
+    .band-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* ===== Pricing Card Selected ===== */
+    .pricing-card-popular {
+      border: 2px solid #11A683;
+      position: relative;
+    }
+
+    /* ===== Skeleton Loader Preview ===== */
+    .skeleton {
+      background: linear-gradient(90deg, #E1E4E8 25%, #F0F1F5 50%, #E1E4E8 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 4px;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ===== Reduced Motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: none; opacity: 1; transform: none; }
+      .feature-card { transition: none; }
+      .typing-cursor-line { animation: none; opacity: 1; }
+      .skeleton { animation: none; }
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ===== Custom Scrollbar ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #F9F9FA; }
+    ::-webkit-scrollbar-thumb { background: #B9BDC5; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #6D758D; }
+  </style>
+</head>
+
+<body class="bg-app-bg text-text-primary">
+
+  <!-- ============================================================
+       SECTION 1: NAVIGATION BAR (Fixed, Floating, Blur)
+       ============================================================ -->
+  <nav class="navbar-blur fixed top-0 left-0 right-0 z-50 border-b border-border-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2 cursor-pointer group" aria-label="Trang chủ IELTS Type & Learn">
+          <div class="w-8 h-8 bg-brand rounded-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-105">
+            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
+          </div>
+          <span class="text-lg font-semibold text-text-primary hidden sm:inline">IELTS Type & Learn</span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#features" class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Tính năng</a>
+          <a href="#how-it-works" class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Cách hoạt động</a>
+          <a href="#demo" class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Demo</a>
+          <a href="#pricing" class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Bảng giá</a>
+          <a href="#testimonials" class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Đánh giá</a>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex items-center gap-3">
+          <a href="/login" class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer hidden sm:inline-block">Đăng nhập</a>
+          <a href="/register" class="inline-flex items-center px-4 py-2 bg-brand text-white text-sm font-medium rounded-lg hover:bg-brand-dark transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2">
+            Bắt đầu miễn phí
+          </a>
+          <!-- Mobile Menu Button -->
+          <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-gray-100 transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-brand" aria-label="Mở menu" aria-expanded="false">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-border-light bg-white">
+      <div class="px-4 py-4 space-y-3">
+        <a href="#features" class="block text-sm font-medium text-text-secondary hover:text-text-primary transition-colors cursor-pointer">Tính năng</a>
+        <a href="#how-it-works" class="block text-sm font-medium text-text-secondary hover:text-text-primary transition-colors cursor-pointer">Cách hoạt động</a>
+        <a href="#demo" class="block text-sm font-medium text-text-secondary hover:text-text-primary transition-colors cursor-pointer">Demo</a>
+        <a href="#pricing" class="block text-sm font-medium text-text-secondary hover:text-text-primary transition-colors cursor-pointer">Bảng giá</a>
+        <a href="#testimonials" class="block text-sm font-medium text-text-secondary hover:text-text-primary transition-colors cursor-pointer">Đánh giá</a>
+        <hr class="border-border-light" />
+        <a href="/login" class="block text-sm font-medium text-text-secondary hover:text-text-primary transition-colors cursor-pointer">Đăng nhập</a>
+        <a href="/register" class="block w-full text-center px-4 py-2 bg-brand text-white text-sm font-medium rounded-lg hover:bg-brand-dark transition-colors cursor-pointer">Bắt đầu miễn phí</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       SECTION 2: HERO — Headline + Visual Demo
+       ============================================================ -->
+  <section class="pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-28 bg-white relative overflow-hidden">
+    <!-- Subtle gradient blob background -->
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-light rounded-full opacity-40 blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-50 rounded-full opacity-30 blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none" aria-hidden="true"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+        <!-- Left: Text Content -->
+        <div class="max-w-xl">
+          <!-- Badge -->
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-brand-light rounded-full mb-6 animate-fade-in">
+            <span class="w-2 h-2 bg-brand rounded-full animate-pulse-soft" aria-hidden="true"></span>
+            <span class="text-xs font-semibold text-brand uppercase tracking-wide">AI-Powered Learning</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-text-primary animate-fade-in-up" style="animation-delay: 0.1s">
+            Luyện IELTS Writing<br />
+            <span class="text-brand">thông minh hơn,</span><br />
+            không phải chăm hơn.
+          </h1>
+
+          <p class="mt-5 text-lg text-text-secondary leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s">
+            Chép chính tả bài mẫu Band 8.0+, phân tích sâu từng cấu trúc câu như 
+            <strong class="text-text-primary">Grammarly</strong>, và thi thử với 
+            <strong class="text-text-primary">AI chấm điểm</strong> theo 4 tiêu chí IELTS — tất cả trong một nền tảng.
+          </p>
+
+          <!-- CTA Group -->
+          <div class="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 animate-fade-in-up" style="animation-delay: 0.3s">
+            <a href="/register" class="inline-flex items-center gap-2 px-6 py-3 bg-brand text-white font-semibold rounded-lg hover:bg-brand-dark transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 text-base">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.58-5.84L18 2.76M2 16.15l2.04-2.04" />
+              </svg>
+              Bắt đầu học miễn phí
+            </a>
+            <a href="#demo" class="inline-flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer group">
+              <span class="w-10 h-10 flex items-center justify-center rounded-full border-2 border-border-light group-hover:border-brand transition-colors duration-200">
+                <svg class="w-4 h-4 text-text-secondary group-hover:text-brand transition-colors" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+              Xem demo
+            </a>
+          </div>
+
+          <!-- Trust Signals -->
+          <div class="mt-8 flex items-center gap-6 text-sm text-text-secondary animate-fade-in-up" style="animation-delay: 0.4s">
+            <div class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Miễn phí trọn đời</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Không cần thẻ tín dụng</span>
+            </div>
+            <div class="flex items-center gap-1.5 hidden sm:flex">
+              <svg class="w-4 h-4 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>500+ bài mẫu</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Visual Demo Card (Grammarly-style Analysis Preview) -->
+        <div class="animate-fade-in-up" style="animation-delay: 0.35s">
+          <div class="bg-white rounded-2xl shadow-card border border-border-light p-6 sm:p-8 relative">
+            <!-- Mock Browser Dots -->
+            <div class="flex items-center gap-1.5 mb-5">
+              <span class="w-3 h-3 rounded-full bg-semantic-red opacity-50" aria-hidden="true"></span>
+              <span class="w-3 h-3 rounded-full bg-semantic-yellow opacity-50" aria-hidden="true"></span>
+              <span class="w-3 h-3 rounded-full bg-brand opacity-50" aria-hidden="true"></span>
+              <span class="ml-3 text-xs text-text-disabled font-medium">Read & Analyze Mode</span>
+            </div>
+
+            <!-- Sample Essay with Semantic Highlights -->
+            <div class="text-base leading-[1.8] text-text-primary font-normal space-y-3">
+              <p>
+                The line graph <span class="underline-lexical" title="Vocabulary (Band 8.0+): Sử dụng 'illustrates' thay vì 'shows' để nâng cao từ vựng.">illustrates</span> the 
+                changes in the amount of goods transported via four different modes in the UK between 1974 and 2002.
+              </p>
+              <p>
+                <span class="underline-coherence" title="Coherence: Từ nối mở bài overview chuẩn, giúp tăng điểm CC.">Overall, it is clear that</span> road transport was 
+                <span class="underline-gra" title="Grammar Range: Cấu trúc so sánh nhất (superlative) kết hợp trang trọng.">by far the most popular</span> method of 
+                goods delivery throughout the period, while the amount of goods moved by 
+                <span class="underline-lexical" title="Vocabulary: 'pipeline' — từ chuyên ngành giao thông, hay hơn 'tube/pipe'.">pipeline</span> saw 
+                <span class="underline-lexical" title="Vocabulary (Band 8.0): Sử dụng 'the most dramatic increase' thay vì 'the biggest growth'.">the most dramatic increase</span>.
+              </p>
+              <p>
+                The amount of goods transported by road <span class="underline-lexical" title="Vocabulary: 'fluctuated wildly' — cụm động từ + trạng từ mạnh.">fluctuated wildly</span>, 
+                <span class="underline-gra" title="Grammar Range: Mệnh đề phân từ (participle clause) giúp tăng GRA.">rising from approximately 70 million tonnes</span> 
+                to just under 100 million tonnes over the period.
+              </p>
+            </div>
+
+            <!-- Floating Tooltip Demo -->
+            <div class="absolute -right-3 top-1/3 w-64 bg-white rounded-xl shadow-float p-4 border border-border-light hidden lg:block">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-semantic-green" aria-hidden="true"></span>
+                <span class="text-xs font-semibold text-semantic-green uppercase tracking-wide">Lexical Resource</span>
+              </div>
+              <p class="text-sm text-text-primary leading-relaxed">
+                <strong>"fluctuated wildly"</strong> — Cụm động từ + trạng từ ăn điểm Band 8.0. Diễn tả biến động mạnh, thay vì dùng "changed a lot".
+              </p>
+              <p class="text-xs text-text-secondary mt-2">Nghĩa: Biến động dữ dội</p>
+            </div>
+
+            <!-- Band Score Bar -->
+            <div class="mt-6 pt-4 border-t border-border-light flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="band-pill bg-brand-light text-brand">Band 8.0</span>
+                <span class="text-xs text-text-secondary">Task 1 — Line Graph</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="band-pill bg-blue-50 text-semantic-blue text-[11px]">CC 8.0</span>
+                <span class="band-pill bg-green-50 text-semantic-green text-[11px]">LR 8.5</span>
+                <span class="band-pill bg-purple-50 text-semantic-purple text-[11px]">GRA 8.0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 3: SOCIAL PROOF BAR
+       ============================================================ -->
+  <section class="py-8 bg-app-bg border-y border-border-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-center">
+        <div>
+          <p class="text-2xl font-bold text-text-primary">10,000+</p>
+          <p class="text-sm text-text-secondary mt-0.5">Học viên đang luyện tập</p>
+        </div>
+        <div class="hidden sm:block w-px h-10 bg-border-light" aria-hidden="true"></div>
+        <div>
+          <p class="text-2xl font-bold text-text-primary">500+</p>
+          <p class="text-sm text-text-secondary mt-0.5">Bài mẫu Band 7.0 — 9.0</p>
+        </div>
+        <div class="hidden sm:block w-px h-10 bg-border-light" aria-hidden="true"></div>
+        <div>
+          <p class="text-2xl font-bold text-text-primary">95%</p>
+          <p class="text-sm text-text-secondary mt-0.5">Người dùng tăng điểm sau 30 ngày</p>
+        </div>
+        <div class="hidden sm:block w-px h-10 bg-border-light" aria-hidden="true"></div>
+        <div>
+          <p class="text-2xl font-bold text-brand">4.8/5</p>
+          <p class="text-sm text-text-secondary mt-0.5">Đánh giá trung bình</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 4: PROBLEM STATEMENT
+       ============================================================ -->
+  <section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+      <h2 class="text-2xl sm:text-3xl font-bold text-text-primary leading-tight">
+        Tại sao luyện IELTS Writing vẫn khó?
+      </h2>
+      <p class="mt-4 text-base text-text-secondary leading-relaxed max-w-2xl mx-auto">
+        Bạn đọc hàng chục bài mẫu nhưng vẫn không biết <em>tại sao</em> chúng đạt Band 8.0? Bạn luyện viết nhưng không ai chấm? 
+        Đó là vì phương pháp truyền thống thiếu đi <strong class="text-text-primary">sự phân tích tương tác</strong> 
+        và <strong class="text-text-primary">phản hồi tức thì</strong>.
+      </p>
+
+      <!-- Pain Points -->
+      <div class="grid sm:grid-cols-3 gap-6 mt-10">
+        <div class="bg-red-50 rounded-xl p-5 text-left">
+          <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-card mb-3">
+            <svg class="w-5 h-5 text-semantic-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold text-text-primary">Đọc mà không hiểu</h3>
+          <p class="text-sm text-text-secondary mt-1.5 leading-relaxed">Đọc bài mẫu thụ động, không biết đâu là cấu trúc ăn điểm, đâu là từ vựng Band 8.0.</p>
+        </div>
+        <div class="bg-yellow-50 rounded-xl p-5 text-left">
+          <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-card mb-3">
+            <svg class="w-5 h-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold text-text-primary">Thiếu phản hồi</h3>
+          <p class="text-sm text-text-secondary mt-1.5 leading-relaxed">Viết xong không ai chấm, không biết mình đang ở Band mấy hay mắc lỗi gì.</p>
+        </div>
+        <div class="bg-blue-50 rounded-xl p-5 text-left">
+          <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-card mb-3">
+            <svg class="w-5 h-5 text-semantic-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 16.318A4.486 4.486 0 0012.016 15a4.486 4.486 0 00-3.198 1.318M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold text-text-primary">Nhớ không nổi</h3>
+          <p class="text-sm text-text-secondary mt-1.5 leading-relaxed">Đọc xong lại quên, không có phương pháp ghi nhớ chủ động từ vựng và cấu trúc.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 5: 3 CORE FEATURES (Modes)
+       ============================================================ -->
+  <section id="features" class="py-16 sm:py-24 bg-app-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center reveal">
+        <h2 class="text-2xl sm:text-3xl font-bold text-text-primary leading-tight">
+          3 chế độ học, một lộ trình toàn diện
+        </h2>
+        <p class="mt-3 text-base text-text-secondary max-w-2xl mx-auto leading-relaxed">
+          Kết hợp Chép chính tả → Phân tích sâu → Thi thử AI để nắm vững kỹ năng Writing thực sự hiệu quả.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-8 mt-12">
+
+        <!-- Feature 1: Dictation Mode -->
+        <div class="feature-card bg-white rounded-2xl p-6 lg:p-8 shadow-card border border-border-light cursor-pointer reveal" style="transition-delay: 0.05s">
+          <div class="w-12 h-12 bg-brand-light rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+            </svg>
+          </div>
+          <span class="band-pill bg-brand-light text-brand mb-3">Miễn phí</span>
+          <h3 class="text-lg font-semibold text-text-primary mt-3">Chép chính tả</h3>
+          <p class="text-sm text-text-secondary mt-2 leading-relaxed">
+            Gõ lại bài mẫu Band 8.0+ từng ký tự. Hệ thống highlight <span class="text-brand font-medium">xanh khi đúng</span>, <span class="text-semantic-red font-medium">đỏ khi sai</span> ngay lập tức. 
+            Ghi nhớ từ vựng và cấu trúc qua cơ chế muscle memory.
+          </p>
+          <ul class="mt-4 space-y-2 text-sm text-text-secondary">
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 text-brand mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Real-time typing feedback (< 10ms)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 text-brand mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Popup nghĩa tiếng Việt khi gõ xong từ khó</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 text-brand mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Thống kê WPM & Accuracy sau mỗi bài</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Feature 2: Read & Analyze Mode -->
+        <div class="feature-card bg-white rounded-2xl p-6 lg:p-8 shadow-card border border-border-light cursor-pointer reveal" style="transition-delay: 0.15s">
+          <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-semantic-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <span class="band-pill bg-blue-50 text-semantic-blue mb-3">Miễn phí</span>
+          <h3 class="text-lg font-semibold text-text-primary mt-3">Đọc & Phân tích</h3>
+          <p class="text-sm text-text-secondary mt-2 leading-relaxed">
+            Giao diện phong cách <strong class="text-text-primary">Grammarly</strong>: mỗi từ vựng hay, cấu trúc ăn điểm được 
+            <span class="underline-lexical">gạch chân màu</span>. Hover vào để xem giải thích chi tiết.
+          </p>
+          <ul class="mt-4 space-y-2 text-sm text-text-secondary">
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 text-semantic-blue mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>4 màu semantic: <span class="text-semantic-green">Từ vựng</span> · <span class="text-semantic-purple">Ngữ pháp</span> · <span class="text-semantic-blue">Mạch lạc</span> · <span class="text-semantic-red">Lỗi sai</span></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 text-semantic-blue mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Tooltip giải thích mượt mà (fade-in 200ms)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 text-semantic-blue mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Sidebar điểm thành phần TR/CC/LR/GRA</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Feature 3: Mock Exam Mode -->
+        <div class="feature-card bg-white rounded-2xl p-6 lg:p-8 shadow-card border border-border-light cursor-pointer relative overflow-hidden reveal" style="transition-delay: 0.25s">
+          <!-- Pro Badge -->
+          <div class="absolute top-4 right-4">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-yellow-50 border border-yellow-200 rounded-full text-[11px] font-semibold text-yellow-700">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" /></svg>
+              PRO
+            </span>
+          </div>
+
+          <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-semantic-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-text-primary mt-3">Phòng thi & AI chấm</h3>
+          <p class="text-sm text-text-secondary mt-2 leading-relaxed">
+            Giao diện thi thật: đề bài bên trái, editor bên phải. Đồng hồ đếm ngược + word count. 
+            AI chấm điểm chi tiết theo <strong class="text-text-primary">4 tiêu chí IELTS</strong> trong vòng 30 giây.
+          </p>
+          <ul class="mt-4 space-y-2 text-sm text-text-secondary">
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 text-semantic-purple mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Đếm ngược 20p (Task 1) / 40p (Task 2)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 text-semantic-purple mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>AI Report: điểm chi tiết + gợi ý sửa lỗi</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 text-semantic-purple mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Phân tích lỗi trực quan phong cách Grammarly</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 6: HOW IT WORKS (3-Step Process)
+       ============================================================ -->
+  <section id="how-it-works" class="py-16 sm:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center reveal">
+        <h2 class="text-2xl sm:text-3xl font-bold text-text-primary">Cách hoạt động</h2>
+        <p class="mt-3 text-base text-text-secondary max-w-xl mx-auto leading-relaxed">
+          Chỉ 3 bước đơn giản để bắt đầu hành trình luyện Writing hiệu quả.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 lg:gap-12 mt-12 relative">
+        <!-- Connection Line (Desktop only) -->
+        <div class="hidden md:block absolute top-12 left-[16.67%] right-[16.67%] h-0.5 bg-border-light" aria-hidden="true"></div>
+
+        <!-- Step 1 -->
+        <div class="text-center reveal" style="transition-delay: 0.05s">
+          <div class="w-14 h-14 bg-brand text-white rounded-2xl flex items-center justify-center mx-auto text-xl font-bold shadow-card relative z-10">1</div>
+          <h3 class="text-base font-semibold text-text-primary mt-5">Chọn bài mẫu</h3>
+          <p class="text-sm text-text-secondary mt-2 leading-relaxed max-w-xs mx-auto">
+            Duyệt kho 500+ bài mẫu. Lọc theo Task 1/2, dạng bài, Band điểm. Chọn bài phù hợp trình độ.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="text-center reveal" style="transition-delay: 0.15s">
+          <div class="w-14 h-14 bg-brand text-white rounded-2xl flex items-center justify-center mx-auto text-xl font-bold shadow-card relative z-10">2</div>
+          <h3 class="text-base font-semibold text-text-primary mt-5">Chọn chế độ học</h3>
+          <p class="text-sm text-text-secondary mt-2 leading-relaxed max-w-xs mx-auto">
+            Chép chính tả để ghi nhớ, Đọc phân tích để hiểu sâu, hoặc vào Phòng thi để thực chiến.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="text-center reveal" style="transition-delay: 0.25s">
+          <div class="w-14 h-14 bg-brand text-white rounded-2xl flex items-center justify-center mx-auto text-xl font-bold shadow-card relative z-10">3</div>
+          <h3 class="text-base font-semibold text-text-primary mt-5">Nhận phản hồi</h3>
+          <p class="text-sm text-text-secondary mt-2 leading-relaxed max-w-xs mx-auto">
+            Xem kết quả ngay: WPM/Accuracy, phân tích bài mẫu tương tác, hoặc AI chấm điểm chi tiết.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 7: INTERACTIVE DEMO PREVIEW
+       ============================================================ -->
+  <section id="demo" class="py-16 sm:py-24 bg-app-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Demo: Dictation Mode Preview -->
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center reveal">
+        <div class="order-2 lg:order-1">
+          <div class="bg-white rounded-2xl shadow-card border border-border-light p-6 sm:p-8">
+            <!-- Mock Editor Header -->
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-border-light">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                </svg>
+                <span class="text-sm font-semibold text-text-primary">Dictation Mode</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs text-text-secondary">
+                <span>WPM: <strong class="text-text-primary">67</strong></span>
+                <span>Accuracy: <strong class="text-brand">96.3%</strong></span>
+              </div>
+            </div>
+
+            <!-- Typing Demo -->
+            <div class="font-mono text-base leading-[2] tracking-wide">
+              <span class="typing-char-correct">The line graph </span><!--
+              --><span class="typing-char-correct">illustrates </span><!--
+              --><span class="typing-char-correct">the changes in </span><!--
+              --><span class="typing-char-correct">the amount of </span><!--
+              --><span class="typing-char-correct">goods </span><!--
+              --><span class="typing-char-wrong">trasnported</span><!--
+              --><span class="typing-cursor-line" aria-hidden="true"></span><!--
+              --><span class="typing-char-pending"> via four different modes in the UK between 1974 and 2002.</span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="mt-6 bg-gray-100 rounded-full h-2 overflow-hidden">
+              <div class="h-full bg-brand rounded-full transition-all duration-300" style="width: 42%"></div>
+            </div>
+            <p class="text-xs text-text-secondary mt-2">Tiến độ: 42% · 108/258 từ</p>
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <span class="inline-flex items-center gap-2 px-3 py-1 bg-brand-light rounded-full text-xs font-semibold text-brand uppercase tracking-wide mb-4">Chế độ 1</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-text-primary leading-tight">
+            Gõ lại, nhớ ngay.<br />
+            <span class="text-brand">Muscle memory cho IELTS.</span>
+          </h2>
+          <p class="mt-4 text-base text-text-secondary leading-relaxed">
+            Thay vì đọc thụ động, bạn sẽ gõ lại từng câu của bài mẫu Band 8.0+. 
+            Mỗi ký tự sai sẽ bị đánh dấu đỏ ngay lập tức — buộc bạn phải sửa trước khi đi tiếp. 
+            Phương pháp này giúp não bộ <strong class="text-text-primary">ghi nhớ sâu</strong> từ vựng và cấu trúc câu.
+          </p>
+          <a href="/register" class="inline-flex items-center gap-2 mt-6 text-sm font-medium text-brand hover:text-brand-dark transition-colors duration-200 cursor-pointer group">
+            Thử chép chính tả ngay
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Demo: Analyze Mode Preview -->
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mt-20 reveal">
+        <div>
+          <span class="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 rounded-full text-xs font-semibold text-semantic-blue uppercase tracking-wide mb-4">Chế độ 2</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-text-primary leading-tight">
+            Hiểu tại sao <span class="text-semantic-blue">bài này đạt Band 8.0.</span>
+          </h2>
+          <p class="mt-4 text-base text-text-secondary leading-relaxed">
+            Mỗi từ vựng hay, cấu trúc ăn điểm, từ nối logic đều được 
+            <span class="underline-lexical">gạch chân</span> với 
+            <span class="underline-gra">màu sắc riêng</span>. 
+            Di chuột vào để xem giải thích chi tiết — giống hệt cách 
+            <strong class="text-text-primary">Grammarly</strong> phân tích văn bản.
+          </p>
+          <div class="flex flex-wrap items-center gap-3 mt-5">
+            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-semantic-green">
+              <span class="w-3 h-0.5 bg-semantic-green rounded" aria-hidden="true"></span> Từ vựng (LR)
+            </span>
+            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-semantic-purple">
+              <span class="w-3 h-0.5 bg-semantic-purple rounded" aria-hidden="true"></span> Ngữ pháp (GRA)
+            </span>
+            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-semantic-blue">
+              <span class="w-3 h-0.5 bg-semantic-blue rounded" aria-hidden="true"></span> Mạch lạc (CC)
+            </span>
+            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-semantic-red">
+              <span class="w-3 h-0.5 bg-semantic-red rounded" aria-hidden="true"></span> Lỗi sai
+            </span>
+          </div>
+          <a href="/register" class="inline-flex items-center gap-2 mt-6 text-sm font-medium text-semantic-blue hover:text-blue-700 transition-colors duration-200 cursor-pointer group">
+            Xem phân tích bài mẫu
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+        </div>
+
+        <div>
+          <div class="bg-white rounded-2xl shadow-card border border-border-light p-6 sm:p-8">
+            <div class="flex items-center gap-2 mb-4 pb-3 border-b border-border-light">
+              <svg class="w-4 h-4 text-semantic-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span class="text-sm font-semibold text-text-primary">Read & Analyze Mode</span>
+            </div>
+
+            <div class="text-[15px] leading-[1.85] text-text-primary space-y-3">
+              <p>
+                <span class="underline-coherence">Overall, it is evident that</span> the number of
+                individuals <span class="underline-lexical">engaging in</span> regular physical activity
+                <span class="underline-lexical">rose considerably</span> over the period,
+                <span class="underline-gra">while sedentary behaviour, which had been predominant in the earlier years,</span>
+                showed a <span class="underline-lexical">marked decline</span>.
+              </p>
+            </div>
+
+            <!-- Score Sidebar Mini -->
+            <div class="mt-5 pt-4 border-t border-border-light grid grid-cols-4 gap-3">
+              <div class="text-center">
+                <p class="text-lg font-bold text-text-primary">8.0</p>
+                <p class="text-[10px] text-text-secondary uppercase tracking-wider">TR</p>
+              </div>
+              <div class="text-center">
+                <p class="text-lg font-bold text-semantic-blue">8.5</p>
+                <p class="text-[10px] text-text-secondary uppercase tracking-wider">CC</p>
+              </div>
+              <div class="text-center">
+                <p class="text-lg font-bold text-semantic-green">8.5</p>
+                <p class="text-[10px] text-text-secondary uppercase tracking-wider">LR</p>
+              </div>
+              <div class="text-center">
+                <p class="text-lg font-bold text-semantic-purple">8.0</p>
+                <p class="text-[10px] text-text-secondary uppercase tracking-wider">GRA</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Demo: Mock Exam Preview -->
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mt-20 reveal">
+        <div class="order-2 lg:order-1">
+          <div class="bg-white rounded-2xl shadow-card border border-border-light overflow-hidden">
+            <!-- Mock Exam Header -->
+            <div class="bg-gray-50 px-6 py-3 border-b border-border-light flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-semantic-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+                </svg>
+                <span class="text-sm font-semibold text-text-primary">Mock Exam — Task 2</span>
+              </div>
+              <div class="flex items-center gap-4 text-xs">
+                <span class="text-semantic-red font-semibold">
+                  <svg class="w-3.5 h-3.5 inline mr-0.5 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  32:15
+                </span>
+                <span class="text-text-secondary">Words: <strong class="text-text-primary">187</strong>/250</span>
+              </div>
+            </div>
+
+            <!-- Split Pane Preview -->
+            <div class="grid grid-cols-2 divide-x divide-border-light">
+              <!-- Left: Prompt -->
+              <div class="p-5">
+                <p class="text-xs font-semibold text-text-secondary uppercase tracking-wide mb-2">Đề bài</p>
+                <p class="text-[13px] text-text-primary leading-relaxed">
+                  Some people believe that the best way to reduce crime is to give longer prison sentences. 
+                  Others, however, argue that there are better ways to reduce crime.
+                </p>
+                <p class="text-[13px] text-text-primary leading-relaxed mt-2 font-medium">
+                  Discuss both views and give your own opinion.
+                </p>
+              </div>
+              <!-- Right: Editor -->
+              <div class="p-5 bg-white">
+                <p class="text-xs font-semibold text-text-secondary uppercase tracking-wide mb-2">Bài viết</p>
+                <p class="text-[13px] text-text-secondary leading-relaxed">
+                  It is often argued that imposing stricter punishments, particularly longer prison terms, is the most effective approach to...
+                </p>
+                <span class="typing-cursor-line ml-0.5" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <span class="inline-flex items-center gap-2 px-3 py-1 bg-purple-50 rounded-full text-xs font-semibold text-semantic-purple uppercase tracking-wide mb-4">
+            Chế độ 3 · PRO
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-text-primary leading-tight">
+            Thi thử. <span class="text-semantic-purple">AI chấm điểm.</span><br />
+            Biết ngay mình band mấy.
+          </h2>
+          <p class="mt-4 text-base text-text-secondary leading-relaxed">
+            Phòng thi mô phỏng thật: đề bài + editor chia đôi, đồng hồ đếm ngược, 
+            bộ đếm từ real-time. Sau khi nộp, AI chấm và trả kết quả chi tiết theo 
+            <strong class="text-text-primary">TR · CC · LR · GRA</strong> trong vòng 30 giây.
+          </p>
+          <a href="/register" class="inline-flex items-center gap-2 mt-6 text-sm font-medium text-semantic-purple hover:text-purple-700 transition-colors duration-200 cursor-pointer group">
+            Thử thi thử miễn phí
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 8: SEMANTIC COLOR SYSTEM SHOWCASE
+       ============================================================ -->
+  <section class="py-16 sm:py-24 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+      <div class="text-center">
+        <h2 class="text-2xl sm:text-3xl font-bold text-text-primary">Hệ thống phân tích trực quan</h2>
+        <p class="mt-3 text-base text-text-secondary max-w-2xl mx-auto leading-relaxed">
+          Mỗi yếu tố trong bài mẫu được mã hóa bằng 4 màu sắc — giúp bạn nhìn ra ngay đâu là từ vựng ăn điểm, 
+          đâu là cấu trúc câu phức tạp, và đâu là lỗi cần tránh.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-5 mt-10">
+        <!-- Green: Lexical -->
+        <div class="flex items-start gap-4 bg-green-50 rounded-xl p-5">
+          <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-card flex-shrink-0">
+            <span class="w-4 h-1 bg-semantic-green rounded-full" aria-hidden="true"></span>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-semantic-green">Từ vựng ăn điểm (Lexical Resource)</h3>
+            <p class="text-sm text-text-secondary mt-1 leading-relaxed">Highlight các collocations, idioms, academic vocabulary đạt Band 7.0+.</p>
+            <p class="text-xs text-text-disabled mt-2 italic">"fluctuated wildly", "a marked decline", "engaging in"</p>
+          </div>
+        </div>
+
+        <!-- Purple: GRA -->
+        <div class="flex items-start gap-4 bg-purple-50 rounded-xl p-5">
+          <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-card flex-shrink-0">
+            <span class="w-4 h-1 bg-semantic-purple rounded-full" aria-hidden="true"></span>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-semantic-purple">Cấu trúc câu phức (Grammar Range)</h3>
+            <p class="text-sm text-text-secondary mt-1 leading-relaxed">Câu điều kiện, mệnh đề quan hệ, câu ghép nâng cao giúp tăng GRA.</p>
+            <p class="text-xs text-text-disabled mt-2 italic">"while sedentary behaviour, which had been predominant..."</p>
+          </div>
+        </div>
+
+        <!-- Blue: CC -->
+        <div class="flex items-start gap-4 bg-blue-50 rounded-xl p-5">
+          <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-card flex-shrink-0">
+            <span class="w-4 h-1 bg-semantic-blue rounded-full" aria-hidden="true"></span>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-semantic-blue">Từ nối & Mạch lạc (Coherence)</h3>
+            <p class="text-sm text-text-secondary mt-1 leading-relaxed">Linking words, signposting language, paragraph transitions giúp tăng CC.</p>
+            <p class="text-xs text-text-disabled mt-2 italic">"Overall, it is evident that", "In addition", "Furthermore"</p>
+          </div>
+        </div>
+
+        <!-- Red: Errors -->
+        <div class="flex items-start gap-4 bg-red-50 rounded-xl p-5">
+          <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-card flex-shrink-0">
+            <span class="w-4 h-1 bg-semantic-red rounded-full" aria-hidden="true"></span>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-semantic-red">Lỗi ngữ pháp & Chính tả</h3>
+            <p class="text-sm text-text-secondary mt-1 leading-relaxed">Gạch chân đỏ các lỗi sai, kèm gợi ý sửa — chỉ hiển thị trong Mock Exam Report.</p>
+            <p class="text-xs text-text-disabled mt-2 italic">"informations" → "information", "peoples" → "people"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 9: PRICING
+       ============================================================ -->
+  <section id="pricing" class="py-16 sm:py-24 bg-app-bg">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center reveal">
+        <h2 class="text-2xl sm:text-3xl font-bold text-text-primary">Bảng giá đơn giản, giá trị rõ ràng</h2>
+        <p class="mt-3 text-base text-text-secondary max-w-xl mx-auto leading-relaxed">
+          Bắt đầu miễn phí. Nâng cấp Pro khi bạn sẵn sàng chinh phục Band 8.0+.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 lg:gap-8 mt-12 max-w-3xl mx-auto">
+
+        <!-- Free Plan -->
+        <div class="bg-white rounded-2xl shadow-card border border-border-light p-6 lg:p-8 reveal" style="transition-delay: 0.05s">
+          <h3 class="text-lg font-semibold text-text-primary">Free</h3>
+          <p class="text-sm text-text-secondary mt-1">Hoàn hảo để bắt đầu</p>
+          <div class="mt-5">
+            <span class="text-4xl font-bold text-text-primary">0đ</span>
+            <span class="text-sm text-text-secondary ml-1">/mãi mãi</span>
+          </div>
+          <a href="/register" class="mt-6 w-full inline-flex items-center justify-center px-5 py-2.5 bg-gray-100 text-text-primary text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2">
+            Bắt đầu miễn phí
+          </a>
+          <ul class="mt-6 space-y-3 text-sm text-text-secondary">
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Truy cập bài mẫu cơ bản (Band 6.0–7.0)</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Chép chính tả (giới hạn lượt/ngày)</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Đọc & Phân tích (mức cơ bản)</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-text-disabled mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+              <span class="text-text-disabled">Phòng thi & AI chấm điểm</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-text-disabled mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+              <span class="text-text-disabled">Bài mẫu Band 8.0–9.0+</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Pro Plan -->
+        <div class="pricing-card-popular bg-white rounded-2xl shadow-card p-6 lg:p-8 reveal" style="transition-delay: 0.15s">
+          <!-- Popular Badge -->
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+            <span class="inline-flex items-center gap-1 px-3 py-1 bg-brand text-white text-xs font-semibold rounded-full shadow-card">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" /></svg>
+              Phổ biến nhất
+            </span>
+          </div>
+
+          <h3 class="text-lg font-semibold text-text-primary">Pro</h3>
+          <p class="text-sm text-text-secondary mt-1">Mở khóa toàn bộ tiềm năng</p>
+          <div class="mt-5">
+            <span class="text-4xl font-bold text-text-primary">199.000đ</span>
+            <span class="text-sm text-text-secondary ml-1">/tháng</span>
+          </div>
+          <a href="/register" class="mt-6 w-full inline-flex items-center justify-center px-5 py-2.5 bg-brand text-white text-sm font-medium rounded-lg hover:bg-brand-dark transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2">
+            Nâng cấp Pro
+          </a>
+          <ul class="mt-6 space-y-3 text-sm text-text-secondary">
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span><strong class="text-text-primary">Tất cả</strong> tính năng Free</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>500+ bài mẫu Band 8.0–9.0+</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Chép chính tả <strong class="text-text-primary">không giới hạn</strong></span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Phân tích sâu toàn bộ bài mẫu</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-semantic-purple mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" /></svg>
+              <span><strong class="text-text-primary">Phòng thi & AI chấm điểm</strong></span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Sổ tay từ vựng không giới hạn</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 10: TESTIMONIALS
+       ============================================================ -->
+  <section id="testimonials" class="py-16 sm:py-24 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center reveal">
+        <h2 class="text-2xl sm:text-3xl font-bold text-text-primary">Học viên nói gì?</h2>
+        <p class="mt-3 text-base text-text-secondary max-w-xl mx-auto leading-relaxed">
+          Hơn 10,000 học viên đã cải thiện kỹ năng Writing với IELTS Type & Learn.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <!-- Testimonial 1 -->
+        <div class="bg-app-bg rounded-2xl p-6 reveal" style="transition-delay: 0.05s">
+          <div class="flex items-center gap-0.5 mb-4" aria-label="5 sao">
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+          </div>
+          <p class="text-sm text-text-primary leading-relaxed">
+            "Tính năng chép chính tả giúp mình nhớ từ vựng nhanh hơn gấp 3 lần so với đọc thụ động. 
+            Sau 2 tháng, Writing tăng từ 6.0 lên <strong>7.5</strong>!"
+          </p>
+          <div class="mt-4 flex items-center gap-3">
+            <div class="w-9 h-9 bg-brand-light rounded-full flex items-center justify-center text-brand font-semibold text-sm">TH</div>
+            <div>
+              <p class="text-sm font-medium text-text-primary">Thu Hương</p>
+              <p class="text-xs text-text-secondary">Sinh viên, TP.HCM · Band 7.5</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="bg-app-bg rounded-2xl p-6 reveal" style="transition-delay: 0.15s">
+          <div class="flex items-center gap-0.5 mb-4" aria-label="5 sao">
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+          </div>
+          <p class="text-sm text-text-primary leading-relaxed">
+            "Chế độ phân tích bài mẫu kiểu Grammarly siêu hay! Mình hover vào từng cụm từ, hiểu ngay 
+            tại sao bài này đạt Band <strong>8.0</strong>. Đây là cách học mình tìm kiếm bấy lâu."
+          </p>
+          <div class="mt-4 flex items-center gap-3">
+            <div class="w-9 h-9 bg-blue-50 rounded-full flex items-center justify-center text-semantic-blue font-semibold text-sm">MK</div>
+            <div>
+              <p class="text-sm font-medium text-text-primary">Minh Khôi</p>
+              <p class="text-xs text-text-secondary">Kỹ sư IT, Hà Nội · Band 8.0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="bg-app-bg rounded-2xl p-6 reveal" style="transition-delay: 0.25s">
+          <div class="flex items-center gap-0.5 mb-4" aria-label="5 sao">
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+            <svg class="w-4 h-4 text-semantic-yellow" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+          </div>
+          <p class="text-sm text-text-primary leading-relaxed">
+            "AI chấm điểm chính xác đáng ngạc nhiên! Mình so sánh với điểm giáo viên feedback 
+            thì chênh lệch không quá 0.5. Tiết kiệm cả triệu tiền học thêm mỗi tháng."
+          </p>
+          <div class="mt-4 flex items-center gap-3">
+            <div class="w-9 h-9 bg-purple-50 rounded-full flex items-center justify-center text-semantic-purple font-semibold text-sm">LA</div>
+            <div>
+              <p class="text-sm font-medium text-text-primary">Lan Anh</p>
+              <p class="text-xs text-text-secondary">Giáo viên, Đà Nẵng · Band 7.0</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 11: FAQ
+       ============================================================ -->
+  <section class="py-16 sm:py-24 bg-app-bg">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center reveal">
+        <h2 class="text-2xl sm:text-3xl font-bold text-text-primary">Câu hỏi thường gặp</h2>
+      </div>
+
+      <div class="mt-10 space-y-3 reveal">
+        <!-- FAQ Item 1 -->
+        <details class="group bg-white rounded-xl border border-border-light overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer text-sm font-medium text-text-primary hover:bg-gray-50 transition-colors duration-200 list-none">
+            <span>Tôi có thể dùng miễn phí mãi mãi không?</span>
+            <svg class="w-4 h-4 text-text-secondary flex-shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4 text-sm text-text-secondary leading-relaxed">
+            Hoàn toàn được! Gói Free cung cấp truy cập bài mẫu cơ bản, chế độ chép chính tả (giới hạn lượt/ngày), 
+            và chế độ đọc phân tích ở mức cơ bản. Bạn có thể dùng mãi mãi mà không cần nhập thông tin thanh toán.
+          </div>
+        </details>
+
+        <!-- FAQ Item 2 -->
+        <details class="group bg-white rounded-xl border border-border-light overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer text-sm font-medium text-text-primary hover:bg-gray-50 transition-colors duration-200 list-none">
+            <span>AI chấm điểm có chính xác không?</span>
+            <svg class="w-4 h-4 text-text-secondary flex-shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4 text-sm text-text-secondary leading-relaxed">
+            AI của chúng tôi được tinh chỉnh dựa trên bộ tiêu chí chính thức của IELTS (TR, CC, LR, GRA) 
+            và đã được đối chiếu với hàng ngàn bài chấm thật. Sai số trung bình khoảng 0.5 band — tương đương 
+            với sai số giữa hai giám khảo thật.
+          </div>
+        </details>
+
+        <!-- FAQ Item 3 -->
+        <details class="group bg-white rounded-xl border border-border-light overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer text-sm font-medium text-text-primary hover:bg-gray-50 transition-colors duration-200 list-none">
+            <span>Tôi có thể dùng trên điện thoại không?</span>
+            <svg class="w-4 h-4 text-text-secondary flex-shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4 text-sm text-text-secondary leading-relaxed">
+            Chế độ Đọc & Phân tích và trang cá nhân hoạt động tốt trên mobile. 
+            Tuy nhiên, chế độ Chép chính tả và Phòng thi yêu cầu sử dụng trên máy tính 
+            để đảm bảo trải nghiệm gõ phím tốt nhất.
+          </div>
+        </details>
+
+        <!-- FAQ Item 4 -->
+        <details class="group bg-white rounded-xl border border-border-light overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer text-sm font-medium text-text-primary hover:bg-gray-50 transition-colors duration-200 list-none">
+            <span>Thanh toán bằng phương thức nào?</span>
+            <svg class="w-4 h-4 text-text-secondary flex-shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4 text-sm text-text-secondary leading-relaxed">
+            Chúng tôi hỗ trợ nhiều phương thức: chuyển khoản ngân hàng, MoMo, ZaloPay, VNPay, 
+            và thẻ quốc tế (Visa/Mastercard). Thanh toán được xử lý qua cổng bảo mật, 
+            không lưu trữ thông tin thẻ trên server.
+          </div>
+        </details>
+
+        <!-- FAQ Item 5 -->
+        <details class="group bg-white rounded-xl border border-border-light overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer text-sm font-medium text-text-primary hover:bg-gray-50 transition-colors duration-200 list-none">
+            <span>Tôi có thể hủy gói Pro bất cứ lúc nào không?</span>
+            <svg class="w-4 h-4 text-text-secondary flex-shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4 text-sm text-text-secondary leading-relaxed">
+            Có, bạn có thể hủy bất cứ lúc nào từ trang Quản lý gói cước trong mục Tài khoản. 
+            Sau khi hủy, bạn vẫn sử dụng được tính năng Pro cho đến hết chu kỳ thanh toán hiện tại.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 12: FINAL CTA
+       ============================================================ -->
+  <section class="py-16 sm:py-24 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-text-primary leading-tight">
+        Sẵn sàng chinh phục<br />
+        <span class="text-brand">IELTS Writing Band 8.0+?</span>
+      </h2>
+      <p class="mt-4 text-base text-text-secondary max-w-xl mx-auto leading-relaxed">
+        Đăng ký miễn phí ngay hôm nay. Không cần thẻ tín dụng. 
+        Bắt đầu chép chính tả bài mẫu đầu tiên trong vòng 30 giây.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/register" class="inline-flex items-center gap-2 px-8 py-3.5 bg-brand text-white font-semibold rounded-lg hover:bg-brand-dark transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 text-base">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.58-5.84L18 2.76M2 16.15l2.04-2.04" />
+          </svg>
+          Bắt đầu miễn phí ngay
+        </a>
+        <a href="#pricing" class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">
+          Xem bảng giá chi tiết
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 13: FOOTER
+       ============================================================ -->
+  <footer class="py-12 bg-app-bg border-t border-border-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Brand -->
+        <div>
+          <a href="/" class="flex items-center gap-2 cursor-pointer" aria-label="Trang chủ">
+            <div class="w-7 h-7 bg-brand rounded-lg flex items-center justify-center">
+              <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+              </svg>
+            </div>
+            <span class="text-sm font-semibold text-text-primary">IELTS Type & Learn</span>
+          </a>
+          <p class="mt-3 text-sm text-text-secondary leading-relaxed max-w-xs">
+            Nền tảng luyện IELTS Writing toàn diện với AI. Chép chính tả, phân tích bài mẫu, thi thử chấm điểm.
+          </p>
+        </div>
+
+        <!-- Product -->
+        <div>
+          <h4 class="text-sm font-semibold text-text-primary mb-4">Sản phẩm</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#features" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Tính năng</a></li>
+            <li><a href="/pricing" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Bảng giá</a></li>
+            <li><a href="/register" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Đăng ký</a></li>
+            <li><a href="/login" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Đăng nhập</a></li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div>
+          <h4 class="text-sm font-semibold text-text-primary mb-4">Hỗ trợ</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Trung tâm hỗ trợ</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Liên hệ</a></li>
+            <li><a href="#" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Blog</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <h4 class="text-sm font-semibold text-text-primary mb-4">Pháp lý</h4>
+          <ul class="space-y-2.5">
+            <li><a href="/terms" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Điều khoản sử dụng</a></li>
+            <li><a href="/privacy" class="text-sm text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer">Chính sách bảo mật</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="mt-10 pt-6 border-t border-border-light flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-xs text-text-disabled">&copy; 2026 IELTS Type & Learn. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <!-- Social: Facebook -->
+          <a href="https://www.facebook.com/share/14d8fGTUimW/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="text-text-disabled hover:text-text-secondary transition-colors duration-200 cursor-pointer" aria-label="Facebook">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" /></svg>
+          </a>
+          <!-- Social: YouTube -->
+          <a href="#" class="text-text-disabled hover:text-text-secondary transition-colors duration-200 cursor-pointer" aria-label="YouTube">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.499 6.203a3.008 3.008 0 00-2.117-2.12C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.382.539A3.008 3.008 0 00.502 6.203C0 8.08 0 12 0 12s0 3.92.502 5.797a3.008 3.008 0 002.116 2.12c1.877.538 9.382.538 9.382.538s7.505 0 9.382-.539a3.008 3.008 0 002.117-2.12C24 15.92 24 12 24 12s0-3.92-.501-5.797zM9.546 15.568V8.432L15.818 12l-6.272 3.568z" /></svg>
+          </a>
+          <!-- Social: Email -->
+          <a href="mailto:thoer197765@gmail.com" class="text-text-disabled hover:text-text-secondary transition-colors duration-200 cursor-pointer" aria-label="Email">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script>
+    // ===== Mobile Menu Toggle =====
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', !isOpen);
+    });
+
+    // Close mobile menu when clicking a link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ===== Scroll Reveal (Intersection Observer) =====
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -60px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // ===== Smooth Scroll for Anchor Links =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ===== Navbar BG on Scroll =====
+    const navbar = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        navbar.classList.add('shadow-card');
+      } else {
+        navbar.classList.remove('shadow-card');
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
