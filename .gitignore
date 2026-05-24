@@ -27,4 +27,5 @@ Thumbs.db
 _codebase/
 .agents/
 prompts/
-
+vendor.zip
+vendor.rar

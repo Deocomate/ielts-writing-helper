@@ -8,14 +8,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use RuntimeException;
-use SePay\Builders\CheckoutBuilder;
-use SePay\SePayClient;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class SePayService
 {
-    private ?SePayClient $client = null;
-
     public function __construct(private readonly CheckoutService $checkoutService) {}
 
     /**
@@ -35,7 +31,7 @@ class SePayService
     }
 
     /**
-     * Build signed checkout fields from the SePay SDK.
+     * Build signed checkout fields.
      *
      * @return array{actionUrl: string, formFields: array<string, mixed>}
      */
@@ -47,22 +43,74 @@ class SePayService
             '',
         );
 
-        $checkoutData = CheckoutBuilder::make()
-            ->currency('VND')
-            ->orderAmount($this->amountToVndInt($transaction->amount))
-            ->operation('PURCHASE')
-            ->orderDescription($description)
-            ->orderInvoiceNumber((string) $transaction->transaction_code)
-            ->customerId((string) $transaction->user_id)
-            ->successUrl(route('client.checkout.success', $transaction->id))
-            ->errorUrl(route('client.checkout.failed', $transaction->id))
-            ->cancelUrl(route('client.checkout.failed', $transaction->id))
-            ->build();
+        $merchantId = (string) config('services.sepay.merchant_id');
+        $secretKey = (string) config('services.sepay.secret_key');
+        $environment = config('services.sepay.environment', 'sandbox');
+
+        if ($merchantId === '' || $secretKey === '') {
+            throw new RuntimeException('SePay credentials have not been configured.');
+        }
+
+        $formFields = [
+            'merchant' => $merchantId,
+            'currency' => 'VND',
+            'order_amount' => (string) $this->amountToVndInt($transaction->amount),
+            'operation' => 'PURCHASE',
+            'order_description' => $description,
+            'order_invoice_number' => (string) $transaction->transaction_code,
+            'customer_id' => (string) $transaction->user_id,
+            'success_url' => route('client.checkout.success', $transaction->id),
+            'error_url' => route('client.checkout.failed', $transaction->id),
+            'cancel_url' => route('client.checkout.failed', $transaction->id),
+        ];
+
+        // Generate signature
+        $formFields['signature'] = $this->signFields($formFields, $secretKey);
+
+        $actionUrl = $environment === 'production'
+            ? 'https://pay.sepay.vn/v1/checkout/init'
+            : 'https://pay-sandbox.sepay.vn/v1/checkout/init';
 
         return [
-            'actionUrl' => $this->client()->checkout()->getCheckoutUrl($this->environment()),
-            'formFields' => $this->client()->checkout()->generateFormFields($checkoutData),
+            'actionUrl' => $actionUrl,
+            'formFields' => $formFields,
         ];
+    }
+
+    /**
+     * Generate HMAC-SHA256 signature for checkout fields.
+     */
+    public function signFields(array $fields, string $secretKey): string
+    {
+        $signed = [];
+        $allowedFields = [
+            'merchant',
+            'env',
+            'operation',
+            'payment_method',
+            'order_amount',
+            'currency',
+            'order_invoice_number',
+            'order_description',
+            'customer_id',
+            'agreement_id',
+            'agreement_name',
+            'agreement_type',
+            'agreement_payment_frequency',
+            'agreement_amount_per_payment',
+            'success_url',
+            'error_url',
+            'cancel_url',
+        ];
+
+        // Process fields in original key insertion order to match SePay expectation
+        foreach ($fields as $key => $value) {
+            if (in_array($key, $allowedFields, true)) {
+                $signed[] = $key.'='.(string) $value;
+            }
+        }
+
+        return base64_encode(hash_hmac('sha256', implode(',', $signed), $secretKey, true));
     }
 
     public function handleIpn(array $payload, string $headerSecretKey): ?Transaction
@@ -131,36 +179,6 @@ class SePayService
             'source' => 'sepay_ipn',
             'raw' => $payload,
         ]);
-    }
-
-    private function client(): SePayClient
-    {
-        if ($this->client !== null) {
-            return $this->client;
-        }
-
-        $merchantId = (string) config('services.sepay.merchant_id');
-        $secretKey = (string) config('services.sepay.secret_key');
-
-        if ($merchantId === '' || $secretKey === '') {
-            throw new RuntimeException('SePay credentials have not been configured.');
-        }
-
-        $this->client = new SePayClient(
-            $merchantId,
-            $secretKey,
-            $this->environment(),
-            ['timeout' => 60],
-        );
-
-        return $this->client;
-    }
-
-    private function environment(): string
-    {
-        return config('services.sepay.environment') === 'production'
-            ? SePayClient::ENVIRONMENT_PRODUCTION
-            : SePayClient::ENVIRONMENT_SANDBOX;
     }
 
     private function invoiceNumber(array $payload): ?string

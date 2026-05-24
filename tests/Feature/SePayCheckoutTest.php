@@ -77,7 +77,7 @@ test('user can create a sepay checkout transaction without calling payos', funct
         ->and((int) $transaction->amount)->toBe(199000);
 });
 
-test('checkout page renders sepay and payos method options', function () {
+test('checkout page renders plan details and payment summary', function () {
     $user = User::factory()->create([
         'role' => 'user',
         'status' => 'active',
@@ -93,9 +93,9 @@ test('checkout page renders sepay and payos method options', function () {
 
     $this->actingAs($user)->get(route('client.checkout'))
         ->assertOk()
-        ->assertSee('SePay Checkout')
-        ->assertSee('PayOS Checkout')
-        ->assertSee("method: 'sepay'", false);
+        ->assertSee('Nâng cấp tài khoản Pro')
+        ->assertSee('Pro 1 Month')
+        ->assertDontSee('PayOS Checkout');
 });
 
 test('sepay ipn rejects invalid secret key', function () {

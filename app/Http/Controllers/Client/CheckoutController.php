@@ -9,7 +9,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use PayOS\Exceptions\WebhookException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
 
@@ -35,36 +34,25 @@ class CheckoutController extends Controller
     {
         $data = $request->validate([
             'plan_id' => ['required', 'exists:plans,id'],
-            'payment_method' => ['required', 'string', 'in:payos,sepay'],
         ]);
 
         try {
-            if ($data['payment_method'] === 'sepay') {
-                $sePayData = $this->sePayService->createTransactionAndForm(
-                    auth()->user(),
-                    (int) $data['plan_id'],
-                );
-
-                return view('client.checkout.sepay-redirect', [
-                    'actionUrl' => $sePayData['actionUrl'],
-                    'formFields' => $sePayData['formFields'],
-                ]);
-            }
-
-            $transaction = $this->checkoutService->createTransaction(
+            $sePayData = $this->sePayService->createTransactionAndForm(
                 auth()->user(),
                 (int) $data['plan_id'],
-                $data['payment_method'],
             );
+
+            return view('client.checkout.sepay-redirect', [
+                'actionUrl' => $sePayData['actionUrl'],
+                'formFields' => $sePayData['formFields'],
+            ]);
         } catch (Throwable $exception) {
             report($exception);
 
             return back()->withInput()->withErrors([
-                'payment_method' => 'Không thể tạo giao dịch lúc này. Vui lòng thử lại sau.',
+                'system' => 'Không thể tạo giao dịch lúc này. Vui lòng thử lại sau.',
             ]);
         }
-
-        return redirect()->route('client.checkout.pending', $transaction->id);
     }
 
     public function success(int $transaction): View
@@ -84,7 +72,6 @@ class CheckoutController extends Controller
     public function pending(int $transaction): View|RedirectResponse
     {
         $txn = auth()->user()->transactions()->with('plan')->findOrFail($transaction);
-        $txn = $this->checkoutService->refreshPaymentStatus($txn);
 
         if ($txn->status === 'success') {
             return redirect()->route('client.checkout.success', $txn->id);
@@ -102,30 +89,6 @@ class CheckoutController extends Controller
         return view('client.checkout.pending', [
             'transaction' => $txn,
             'qrImageUrl' => $qrImageUrl,
-        ]);
-    }
-
-    public function webhook(Request $request): JsonResponse
-    {
-        try {
-            $transaction = $this->checkoutService->handleWebhook($request->all());
-        } catch (WebhookException $exception) {
-            report($exception);
-
-            return response()->json([
-                'message' => 'Invalid webhook signature.',
-            ], 400);
-        } catch (Throwable $exception) {
-            report($exception);
-
-            return response()->json([
-                'message' => 'Webhook processing error.',
-            ], 500);
-        }
-
-        return response()->json([
-            'message' => 'Webhook processed.',
-            'transaction_id' => $transaction?->id,
         ]);
     }
 

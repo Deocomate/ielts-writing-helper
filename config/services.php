@@ -57,15 +57,6 @@ return [
         'redirect' => env('FACEBOOK_REDIRECT_URI', '/auth/facebook/callback'),
     ],
 
-    'payos' => [
-        'client_id' => env('PAYOS_CLIENT_ID'),
-        'api_key' => env('PAYOS_API_KEY'),
-        'checksum_key' => env('PAYOS_CHECKSUM_KEY'),
-        'return_route' => env('PAYOS_RETURN_ROUTE', 'client.checkout.pending'),
-        'cancel_route' => env('PAYOS_CANCEL_ROUTE', 'client.checkout.failed'),
-        'webhook_route' => env('PAYOS_WEBHOOK_ROUTE', 'client.checkout.payos.webhook'),
-    ],
-
     'sepay' => [
         'merchant_id' => env('SEPAY_MERCHANT_ID'),
         'secret_key' => env('SEPAY_SECRET_KEY'),

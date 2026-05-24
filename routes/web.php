@@ -33,7 +33,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('gioi-thieu', [HomeController::class, 'about'])->name('client.home.about');
 Route::get('chuc-nang', [HomeController::class, 'features'])->name('client.home.features');
 Route::get('goi-lien-he', [HomeController::class, 'pricingAndContact'])->name('client.home.pricing-contact');
-Route::post('checkout/payos/webhook', [CheckoutController::class, 'webhook'])->name('client.checkout.payos.webhook');
 Route::post('checkout/sepay/ipn', [CheckoutController::class, 'sepayIpn'])->name('client.checkout.sepay.ipn');
 
 Route::middleware('guest')->group(function () {
