@@ -78,6 +78,29 @@
     {{-- Left: annotated essay --}}
     <div class="flex-1 overflow-y-auto">
       <div class="max-w-2xl mx-auto px-6 py-8">
+        {{-- Collapsible Prompt & Image Preview --}}
+        <details class="group bg-white rounded-xl border border-border-light shadow-card mb-5 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between px-5 py-3 cursor-pointer select-none hover:bg-gray-50/50 transition-colors">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 bg-brand-light text-brand rounded-lg flex items-center justify-center">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+              </div>
+              <span class="text-sm font-semibold text-text-primary">Xem đề bài & hình ảnh minh họa</span>
+            </div>
+            <svg class="w-4 h-4 text-text-secondary transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-5 pb-5 pt-3 border-t border-border-light space-y-4 bg-white">
+            <p class="text-sm text-text-secondary leading-relaxed whitespace-pre-line">{{ $lesson->prompt_text }}</p>
+            @if($lesson->image_path)
+              <div class="rounded-xl border border-border-light overflow-hidden bg-white p-2">
+                <img src="{{ Storage::disk('public')->url($lesson->image_path) }}" alt="Diagram/Map" class="w-full max-h-[350px] object-contain mx-auto" />
+              </div>
+            @endif
+          </div>
+        </details>
+
         {{-- Legend --}}
         <div class="flex flex-wrap items-center gap-2 mb-6">
           <span class="text-xs text-text-disabled font-medium mr-1">Chú thích:</span>
