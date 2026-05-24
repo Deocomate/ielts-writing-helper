@@ -33,7 +33,7 @@
                 <div class="p-5 space-y-3">
                     @if($lesson->image_path)
                         <div class="rounded-lg overflow-hidden border border-border-light bg-gray-50">
-                            <img src="{{ asset('storage/' . $lesson->image_path) }}" alt="Ảnh đề bài" class="w-full max-h-[300px] object-contain" />
+                            <img src="{{ Storage::disk('public')->url($lesson->image_path) }}" alt="Ảnh đề bài" class="w-full max-h-[300px] object-contain" />
                         </div>
                     @endif
                     <div class="text-sm text-text-primary leading-relaxed whitespace-pre-line">{{ $lesson->prompt_text }}</div>

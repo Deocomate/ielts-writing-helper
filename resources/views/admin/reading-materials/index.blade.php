@@ -29,6 +29,7 @@
 			<table class="min-w-full text-sm table-hover">
 				<thead>
 					<tr class="bg-gray-50/80 border-b border-border-light">
+						<th class="px-5 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Ảnh</th>
 						<th class="px-5 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Tiêu đề</th>
 						<th class="px-5 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Chủ đề</th>
 						<th class="px-5 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Lượt xem</th>
@@ -39,6 +40,13 @@
 				<tbody class="divide-y divide-border-light">
 					@forelse($materials as $material)
 						<tr>
+							<td class="px-5 py-3.5 w-20">
+								@if($material->image_path)
+									<img src="{{ Storage::disk('public')->url($material->image_path) }}" class="w-12 h-10 object-cover rounded border border-border-light" alt="Thumbnail">
+								@else
+									<div class="w-12 h-10 bg-gray-100 rounded border border-dashed border-gray-300 flex items-center justify-center text-[10px] text-gray-400">No img</div>
+								@endif
+							</td>
 							<td class="px-5 py-3.5">
 								<p class="font-medium text-text-primary truncate max-w-xs">{{ $material->title }}</p>
 								<p class="text-xs text-text-secondary mt-0.5 truncate max-w-xs">{{ $material->excerpt }}</p>
@@ -66,7 +74,7 @@
 							</td>
 						</tr>
 					@empty
-						<tr><td colspan="5" class="px-5 py-12 text-center text-sm text-text-secondary">Chưa có học liệu nào.</td></tr>
+						<tr><td colspan="6" class="px-5 py-12 text-center text-sm text-text-secondary">Chưa có học liệu nào.</td></tr>
 					@endforelse
 				</tbody>
 			</table>

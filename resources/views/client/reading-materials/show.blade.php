@@ -20,10 +20,15 @@
       <span class="text-text-primary font-medium truncate">{{ $material->title }}</span>
     </div>
 
+    @if($material->image_path)
+      <div class="w-full h-[300px] md:h-[450px] rounded-2xl overflow-hidden mb-8 shadow-card border border-border-light bg-gray-50">
+        <img src="{{ Storage::disk('public')->url($material->image_path) }}" 
+             alt="{{ $material->title }}" 
+             class="w-full h-full object-cover" />
+      </div>
+    @endif
+
     <article class="bg-white border border-border-light rounded-2xl shadow-card overflow-hidden">
-      @if($material->image_path)
-        <img src="{{ Storage::disk('public')->url($material->image_path) }}" alt="{{ $material->title }}" class="w-full h-56 sm:h-72 object-cover" />
-      @endif
       <div class="p-6 sm:p-8">
         <div class="flex flex-wrap items-center gap-2 mb-4">
           <span class="px-2.5 py-1 bg-brand-light text-brand text-xs font-semibold rounded-full">{{ Str::headline($material->topic) }}</span>

@@ -88,8 +88,8 @@
         <div class="text-sm text-text-primary mb-4 leading-relaxed whitespace-pre-line">{{ $lesson->prompt_text }}</div>
 
         @if($lesson->image_path)
-          <div class="w-full mb-4">
-            <img src="{{ asset('storage/' . $lesson->image_path) }}" alt="Chart" class="w-full rounded-xl border border-border-light" />
+          <div class="mt-4 mb-4 rounded-xl border border-border-light overflow-hidden bg-white p-2">
+            <img src="{{ Storage::disk('public')->url($lesson->image_path) }}" alt="Diagram/Map" class="w-full max-h-[400px] object-contain mx-auto" />
           </div>
         @endif
 

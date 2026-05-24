@@ -30,6 +30,7 @@
             <table class="min-w-full text-sm table-hover">
                 <thead>
                     <tr class="bg-gray-50/80 border-b border-border-light">
+                        <th class="px-5 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Ảnh</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Tiêu đề</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Task</th>
                         <th class="px-5 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Band</th>
@@ -41,6 +42,13 @@
                 <tbody class="divide-y divide-border-light">
                     @forelse($lessons as $lesson)
                         <tr>
+                            <td class="px-5 py-3.5 w-20">
+                                @if($lesson->image_path)
+                                    <img src="{{ Storage::disk('public')->url($lesson->image_path) }}" class="w-12 h-10 object-cover rounded border border-border-light" alt="Thumbnail">
+                                @else
+                                    <div class="w-12 h-10 bg-gray-100 rounded border border-dashed border-gray-300 flex items-center justify-center text-[10px] text-gray-400">No img</div>
+                                @endif
+                            </td>
                             <td class="px-5 py-3.5">
                                 <p class="font-medium text-text-primary truncate max-w-xs">{{ $lesson->title }}</p>
                                 <p class="text-xs text-text-secondary mt-0.5 truncate max-w-xs">{{ Str::limit($lesson->prompt_text, 60) }}</p>
@@ -103,7 +111,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-5 py-12 text-center">
+                            <td colspan="7" class="px-5 py-12 text-center">
                                 <svg class="w-10 h-10 text-text-disabled mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                                 <p class="text-sm text-text-secondary">Chưa có bài học nào.</p>
                                 <a href="{{ route('admin.lessons.create') }}" class="inline-block mt-2 text-sm text-brand hover:text-brand-dark font-medium cursor-pointer">Thêm bài học đầu tiên</a>

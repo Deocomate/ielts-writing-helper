@@ -195,8 +195,10 @@
           $taskLabel = $lesson->task_type === 'task_1' ? 'Task 1' : 'Task 2';
         @endphp
         <div class="lesson-card bg-white rounded-xl border border-border-light overflow-hidden {{ $locked ? 'opacity-80' : '' }}">
-          <div class="h-28 bg-linear-to-br {{ $gradient }} flex items-center justify-center relative">
-            <svg class="w-12 h-12 text-brand opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          <div class="h-28 relative overflow-hidden group">
+            <img src="{{ app(\App\Services\FileUploadService::class)->url($lesson->image_path, 'lesson') }}" 
+                 alt="{{ $lesson->title }}" 
+                 class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
             @if($isPro)
               <div class="absolute top-2 right-2 flex items-center gap-1 px-1.5 py-0.5 bg-white rounded-full shadow-card">
                 <svg class="w-3 h-3 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -332,12 +334,8 @@
       <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
         @foreach($materials as $material)
           <a href="{{ route('client.reading-materials.show', $material) }}" class="lesson-card bg-white rounded-xl border border-border-light overflow-hidden block">
-            <div class="h-28 bg-linear-to-br from-blue-50 to-brand-light flex items-center justify-center">
-              @if($material->image_path)
-                <img src="{{ Storage::disk('public')->url($material->image_path) }}" alt="{{ $material->title }}" class="w-full h-full object-cover" />
-              @else
-                <svg class="w-12 h-12 text-brand opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-              @endif
+            <div class="h-28 relative overflow-hidden group">
+              <img src="{{ app(\App\Services\FileUploadService::class)->url($material->image_path, 'material') }}" alt="{{ $material->title }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
             </div>
             <div class="p-4">
               <div class="flex items-center gap-2 mb-2">

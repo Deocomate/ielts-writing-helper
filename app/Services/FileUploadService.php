@@ -11,13 +11,13 @@ class FileUploadService
     /**
      * Upload a file to the public disk.
      *
-     * @param UploadedFile $file  The uploaded file instance.
-     * @param string       $directory  Subdirectory inside storage/app/public.
-     * @return string  The relative path stored in DB (e.g. "lessons/abc123.png").
+     * @param  UploadedFile  $file  The uploaded file instance.
+     * @param  string  $directory  Subdirectory inside storage/app/public.
+     * @return string The relative path stored in DB (e.g. "lessons/abc123.png").
      */
     public function upload(UploadedFile $file, string $directory = 'lessons'): string
     {
-        $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+        $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
 
         return $file->storeAs($directory, $filename, 'public');
     }
@@ -25,7 +25,7 @@ class FileUploadService
     /**
      * Delete a file from the public disk.
      *
-     * @param string|null $path  The relative path stored in DB.
+     * @param  string|null  $path  The relative path stored in DB.
      */
     public function delete(?string $path): void
     {
@@ -37,13 +37,14 @@ class FileUploadService
     /**
      * Get the public URL of an uploaded file.
      *
-     * @param string|null $path  The relative path stored in DB.
-     * @return string|null  Full public URL or null.
+     * @param  string|null  $path  The relative path stored in DB.
+     * @param  string  $type  The type of default image ('lesson' or 'material').
+     * @return string Full public URL.
      */
-    public function url(?string $path): ?string
+    public function url(?string $path, string $type = 'lesson'): string
     {
-        if (!$path) {
-            return null;
+        if (! $path) {
+            return asset("images/default-{$type}.png");
         }
 
         return Storage::disk('public')->url($path);
