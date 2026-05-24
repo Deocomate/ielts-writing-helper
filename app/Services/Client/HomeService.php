@@ -6,6 +6,7 @@ use App\Helpers\FormatHelper;
 use App\Models\Lesson;
 use App\Models\Plan;
 use App\Models\User;
+use App\Services\SettingService;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
 
@@ -21,6 +22,7 @@ class HomeService
                 'title' => 'IELTS Type & Learn — Luyện Writing thông minh với AI',
                 'description' => 'Nền tảng luyện IELTS Writing toàn diện: Chép chính tả, Phân tích bài mẫu phong cách Grammarly, và Thi thử chấm điểm bằng AI.',
             ],
+            'demo_video_url' => app(SettingService::class)->getDemoVideoUrl(),
             'hero' => [
                 'badge' => 'AI-Powered Learning',
                 'title_lines' => ['Luyện IELTS Writing', 'thông minh hơn,', 'không phải chăm hơn.'],
@@ -270,11 +272,6 @@ class HomeService
                     'plan' => 'Pro',
                     'fit_for' => 'Người đặt mục tiêu tăng band rõ ràng trong thời gian ngắn.',
                     'best_when' => 'Bạn cần bài mẫu nâng cao, thi thử không giới hạn và AI report chuyên sâu.',
-                ],
-                [
-                    'plan' => 'Nhóm / Lớp học',
-                    'fit_for' => 'Giáo viên, trung tâm hoặc nhóm học cần quản lý nhiều học viên.',
-                    'best_when' => 'Bạn muốn theo dõi tiến độ tập trung và tối ưu chi phí theo số lượng.',
                 ],
             ],
             'contact' => [

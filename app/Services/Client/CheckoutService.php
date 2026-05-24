@@ -40,15 +40,7 @@ class CheckoutService
     public function createTransaction(User $user, int $planId, string $paymentMethod): Transaction
     {
         $plan = $this->getPlan($planId);
-
-        $transaction = Transaction::create([
-            'user_id' => $user->id,
-            'plan_id' => $plan->id,
-            'amount' => $plan->price,
-            'payment_method' => $paymentMethod,
-            'transaction_code' => 'TXN-'.strtoupper(Str::random(12)),
-            'status' => 'pending',
-        ]);
+        $transaction = $this->createPendingTransaction($user, $plan, $paymentMethod);
 
         $orderCode = $this->buildOrderCode($transaction->id);
         $amount = (int) round((float) $plan->price);
@@ -88,6 +80,18 @@ class CheckoutService
         ]);
 
         return $transaction->fresh(['plan', 'user']);
+    }
+
+    public function createPendingTransaction(User $user, Plan $plan, string $paymentMethod, string $codePrefix = 'TXN'): Transaction
+    {
+        return Transaction::create([
+            'user_id' => $user->id,
+            'plan_id' => $plan->id,
+            'amount' => $plan->price,
+            'payment_method' => $paymentMethod,
+            'transaction_code' => strtoupper($codePrefix).'-'.strtoupper(Str::random(12)),
+            'status' => 'pending',
+        ]);
     }
 
     /**

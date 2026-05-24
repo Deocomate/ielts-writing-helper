@@ -76,7 +76,7 @@
   <x-slot:headerContent>
     <div>
       <h1 class="text-lg font-bold text-text-primary">Thư viện bài học</h1>
-      <p class="text-xs text-text-secondary">{{ $totalCount }} bài học &middot; Task 1 & Task 2</p>
+      <p class="text-xs text-text-secondary">{{ $totalCount }} bài học &middot; {{ $materials->total() }} học liệu &middot; {{ $exercises->total() }} bài tập</p>
     </div>
   </x-slot:headerContent>
   <x-slot:headerActions>
@@ -157,7 +157,25 @@
     </form>
   </div>
 
+  @php
+    $tabs = [
+      'ielts' => ['label' => 'IELTS Writing', 'count' => $totalCount],
+      'materials' => ['label' => 'Học liệu mở rộng', 'count' => $materials->total()],
+      'exercises' => ['label' => 'Trạm sửa lỗi', 'count' => $exercises->total()],
+    ];
+  @endphp
+  <div class="flex items-center gap-2 mb-5 overflow-x-auto pb-1">
+    @foreach($tabs as $tabKey => $tab)
+      <a href="{{ route('client.lessons.library', array_merge(request()->except('page'), ['tab' => $tabKey])) }}"
+         class="filter-chip flex-shrink-0 px-3 py-1.5 rounded-lg border text-xs font-semibold cursor-pointer {{ $activeTab === $tabKey ? 'active border-brand bg-brand text-white' : 'border-border-light bg-white text-text-secondary hover:text-brand hover:border-brand' }}">
+        {{ $tab['label'] }}
+        <span class="{{ $activeTab === $tabKey ? 'text-white/80' : 'text-text-disabled' }}">({{ $tab['count'] }})</span>
+      </a>
+    @endforeach
+  </div>
+
   {{-- Lesson grid --}}
+  @if($activeTab === 'ielts')
   @if($lessons->isEmpty())
     <div class="bg-white rounded-xl border border-border-light p-10 text-center">
       <p class="text-sm text-text-disabled">Không tìm thấy bài học phù hợp.</p>
@@ -304,5 +322,61 @@
     </div>
 
     <div class="mt-6">{{ $lessons->withQueryString()->links() }}</div>
+  @endif
+  @elseif($activeTab === 'materials')
+    @if($materials->isEmpty())
+      <div class="bg-white rounded-xl border border-border-light p-10 text-center">
+        <p class="text-sm text-text-disabled">Chưa có học liệu phù hợp.</p>
+      </div>
+    @else
+      <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        @foreach($materials as $material)
+          <a href="{{ route('client.reading-materials.show', $material) }}" class="lesson-card bg-white rounded-xl border border-border-light overflow-hidden block">
+            <div class="h-28 bg-linear-to-br from-blue-50 to-brand-light flex items-center justify-center">
+              @if($material->image_path)
+                <img src="{{ Storage::disk('public')->url($material->image_path) }}" alt="{{ $material->title }}" class="w-full h-full object-cover" />
+              @else
+                <svg class="w-12 h-12 text-brand opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              @endif
+            </div>
+            <div class="p-4">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="px-2 py-0.5 bg-brand-light text-brand text-xs font-semibold rounded">{{ Str::headline($material->topic) }}</span>
+                <span class="ml-auto text-xs text-text-disabled">{{ $material->views_count }} lượt xem</span>
+              </div>
+              <h3 class="font-semibold text-sm text-text-primary leading-snug mb-1">{{ $material->title }}</h3>
+              <p class="text-xs text-text-secondary line-clamp-3">{{ $material->excerpt }}</p>
+            </div>
+          </a>
+        @endforeach
+      </div>
+      <div class="mt-6">{{ $materials->withQueryString()->links() }}</div>
+    @endif
+  @else
+    @if($exercises->isEmpty())
+      <div class="bg-white rounded-xl border border-border-light p-10 text-center">
+        <p class="text-sm text-text-disabled">Chưa có bài tập phù hợp.</p>
+      </div>
+    @else
+      <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        @foreach($exercises as $exercise)
+          <a href="{{ route('client.mini-exercises.show', $exercise) }}" class="lesson-card bg-white rounded-xl border border-border-light overflow-hidden block">
+            <div class="h-28 bg-linear-to-br from-purple-50 to-purple-100 flex items-center justify-center">
+              <svg class="w-12 h-12 text-semantic-purple opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-3-3v6m9-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            </div>
+            <div class="p-4">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="px-2 py-0.5 bg-purple-50 text-semantic-purple text-xs font-semibold rounded">{{ Str::headline($exercise->mistake_type) }}</span>
+                <span class="px-2 py-0.5 bg-app-bg text-text-secondary text-xs rounded">{{ Str::headline($exercise->exercise_type) }}</span>
+              </div>
+              <h3 class="font-semibold text-sm text-text-primary leading-snug mb-1">{{ $exercise->title }}</h3>
+              <p class="text-xs text-text-secondary line-clamp-2">{{ Str::limit($exercise->explanation, 110) }}</p>
+              <span class="inline-flex items-center justify-center w-full mt-3 py-2 bg-brand text-white text-xs font-semibold rounded-lg">Làm bài ngay</span>
+            </div>
+          </a>
+        @endforeach
+      </div>
+      <div class="mt-6">{{ $exercises->withQueryString()->links() }}</div>
+    @endif
   @endif
 </x-client.layout.dashboard>

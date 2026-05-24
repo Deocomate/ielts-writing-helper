@@ -39,6 +39,16 @@
             </svg>
             Bắt đầu học miễn phí
           </a>
+          @if($homeData['demo_video_url'] ?? null)
+          <button type="button" @click="$dispatch('open-demo-video')" class="inline-flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer group">
+            <span class="w-10 h-10 flex items-center justify-center rounded-full border-2 border-border-light group-hover:border-brand transition-colors duration-200">
+              <svg class="w-4 h-4 text-text-secondary group-hover:text-brand transition-colors" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </span>
+            Xem demo
+          </button>
+          @else
           <a href="{{ route('client.home.features') }}#demo" class="inline-flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200 cursor-pointer group">
             <span class="w-10 h-10 flex items-center justify-center rounded-full border-2 border-border-light group-hover:border-brand transition-colors duration-200">
               <svg class="w-4 h-4 text-text-secondary group-hover:text-brand transition-colors" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -47,6 +57,7 @@
             </span>
             Xem demo
           </a>
+          @endif
         </div>
 
         <!-- Trust Signals -->

@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->validateCsrfTokens(except: [
             'checkout/payos/webhook',
+            'checkout/sepay/ipn',
         ]);
 
         // Redirect unauthenticated users on the admin guard to the admin login page

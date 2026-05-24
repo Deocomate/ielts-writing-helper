@@ -27,4 +27,5 @@
   @include('client.home.partials.demo-section')
   @include('client.home.partials.color-system-section')
   @include('client.home.partials.final-cta-section')
+  @include('client.home.partials.demo-video-modal')
 </x-client.layout.marketing-page>

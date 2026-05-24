@@ -3,10 +3,13 @@
 use App\Http\Controllers\Admin\AiAssistantController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\Admin\LessonAnnotationController;
 use App\Http\Controllers\Admin\LessonController;
 use App\Http\Controllers\Admin\LessonVocabularyController;
+use App\Http\Controllers\Admin\MiniExerciseController;
 use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\ReadingMaterialController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Client\AiChatController;
@@ -17,7 +20,9 @@ use App\Http\Controllers\Client\DashboardController as ClientDashboardController
 use App\Http\Controllers\Client\DictationController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\LessonController as ClientLessonController;
+use App\Http\Controllers\Client\MiniExerciseController as ClientMiniExerciseController;
 use App\Http\Controllers\Client\MockExamController;
+use App\Http\Controllers\Client\ReadingMaterialController as ClientReadingMaterialController;
 use App\Http\Controllers\Client\SocialAuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +34,7 @@ Route::get('gioi-thieu', [HomeController::class, 'about'])->name('client.home.ab
 Route::get('chuc-nang', [HomeController::class, 'features'])->name('client.home.features');
 Route::get('goi-lien-he', [HomeController::class, 'pricingAndContact'])->name('client.home.pricing-contact');
 Route::post('checkout/payos/webhook', [CheckoutController::class, 'webhook'])->name('client.checkout.payos.webhook');
+Route::post('checkout/sepay/ipn', [CheckoutController::class, 'sepayIpn'])->name('client.checkout.sepay.ipn');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [ClientAuthController::class, 'showLogin'])->name('login');
@@ -73,6 +79,8 @@ Route::middleware('auth')->group(function () {
 
     // ── Learning ──────────────────────────────────────────────────────────
     Route::get('lessons', [ClientLessonController::class, 'library'])->name('client.lessons.library');
+    Route::get('reading-materials/{readingMaterial}', [ClientReadingMaterialController::class, 'show'])->name('client.reading-materials.show');
+    Route::get('mini-exercises/{miniExercise}', [ClientMiniExerciseController::class, 'show'])->name('client.mini-exercises.show');
 
     Route::get('learning/dictation/{lesson}', [DictationController::class, 'show'])
         ->whereNumber('lesson')
@@ -140,6 +148,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::get('ai-assistant', [AiAssistantController::class, 'edit'])->name('ai-assistant.edit');
             Route::put('ai-assistant', [AiAssistantController::class, 'update'])->name('ai-assistant.update');
+            Route::get('settings/general', [GeneralSettingController::class, 'edit'])->name('settings.general.edit');
+            Route::put('settings/general', [GeneralSettingController::class, 'update'])->name('settings.general.update');
 
             Route::get('clients', [ClientController::class, 'index'])->name('clients.index');
             Route::get('clients/{client}', [ClientController::class, 'show'])->name('clients.show');
@@ -147,6 +157,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('clients/{client}/subscription', [ClientController::class, 'updateSubscription'])->name('clients.update-subscription');
 
             Route::resource('lessons', LessonController::class)->except(['show']);
+            Route::resource('reading-materials', ReadingMaterialController::class)
+                ->parameters(['reading-materials' => 'readingMaterial'])
+                ->except(['show']);
+            Route::resource('mini-exercises', MiniExerciseController::class)
+                ->parameters(['mini-exercises' => 'miniExercise'])
+                ->except(['show']);
             Route::get('lessons/{lesson}/mapping', [LessonController::class, 'mapping'])->name('lessons.mapping');
             Route::post('lessons/{lesson}/annotations', [LessonAnnotationController::class, 'store'])->name('lessons.annotations.store');
             Route::put('lessons/{lesson}/annotations/{annotation}', [LessonAnnotationController::class, 'update'])->name('lessons.annotations.update');

@@ -66,4 +66,10 @@ return [
         'webhook_route' => env('PAYOS_WEBHOOK_ROUTE', 'client.checkout.payos.webhook'),
     ],
 
+    'sepay' => [
+        'merchant_id' => env('SEPAY_MERCHANT_ID'),
+        'secret_key' => env('SEPAY_SECRET_KEY'),
+        'environment' => env('SEPAY_ENVIRONMENT', 'sandbox'),
+    ],
+
 ];

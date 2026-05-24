@@ -38,7 +38,7 @@
       </div>
 
       <div class="mt-6 flex flex-col sm:flex-row gap-3">
-        <a href="{{ route('client.checkout.index') }}" class="flex-1 py-3 bg-brand text-white text-sm font-semibold rounded-xl hover:bg-brand-dark transition-colors text-center cursor-pointer">Thử lại</a>
+        <a href="{{ route('client.checkout') }}" class="flex-1 py-3 bg-brand text-white text-sm font-semibold rounded-xl hover:bg-brand-dark transition-colors text-center cursor-pointer">Thử lại</a>
         <a href="{{ route('client.dashboard') }}" class="flex-1 py-3 border border-border-light text-sm font-medium text-text-secondary rounded-xl hover:bg-app-bg transition-colors text-center cursor-pointer">Về Dashboard</a>
       </div>
     </div>

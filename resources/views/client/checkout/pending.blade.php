@@ -16,32 +16,32 @@
         <svg class="w-7 h-7 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       </div>
       <h1 class="text-2xl font-black text-text-primary">Đang chờ thanh toán</h1>
-      <p class="text-sm text-text-secondary mt-2">Đơn hàng của bạn đang chờ xác nhận thanh toán. Vui lòng hoàn tất thanh toán qua QR bên dưới.</p>
+      <p class="text-sm text-text-secondary mt-2">Đơn hàng của bạn đang chờ xác nhận thanh toán. Vui lòng hoàn tất thanh toán qua cổng đã chọn.</p>
 
-      @if(!empty($order['qr_url']))
+      @if(!empty($qrImageUrl))
         <div class="mt-6 inline-block bg-white p-3 border border-border-light rounded-xl">
-          <img src="{{ $order['qr_url'] }}" alt="QR thanh toán" class="w-48 h-48 mx-auto" />
+          <img src="{{ $qrImageUrl }}" alt="QR thanh toán" class="w-48 h-48 mx-auto" />
         </div>
       @endif
 
       <div class="mt-6 bg-app-bg rounded-xl p-4 text-left space-y-2">
-        <div class="flex justify-between text-sm">
+        <div class="flex justify-between gap-4 text-sm">
           <span class="text-text-secondary">Mã đơn hàng</span>
-          <span class="font-semibold text-text-primary">{{ $order['order_code'] ?? '—' }}</span>
+          <span class="font-semibold text-text-primary text-right">{{ $transaction->gateway_order_code ?? $transaction->transaction_code }}</span>
         </div>
-        <div class="flex justify-between text-sm">
+        <div class="flex justify-between gap-4 text-sm">
           <span class="text-text-secondary">Số tiền</span>
-          <span class="font-semibold text-text-primary">{{ number_format($order['amount'] ?? 0) }}đ</span>
+          <span class="font-semibold text-text-primary">{{ number_format((float) $transaction->amount, 0, ',', '.') }}đ</span>
         </div>
-        <div class="flex justify-between text-sm">
+        <div class="flex justify-between gap-4 text-sm">
           <span class="text-text-secondary">Trạng thái</span>
           <span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-xs font-semibold rounded">Chờ thanh toán</span>
         </div>
       </div>
 
       <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-        @if(!empty($order['checkout_url']))
-          <a href="{{ $order['checkout_url'] }}" target="_blank" class="py-3 px-6 bg-brand text-white text-sm font-semibold rounded-xl hover:bg-brand-dark transition-colors cursor-pointer text-center">Thanh toán ngay</a>
+        @if(!empty($transaction->checkout_url))
+          <a href="{{ $transaction->checkout_url }}" target="_blank" class="py-3 px-6 bg-brand text-white text-sm font-semibold rounded-xl hover:bg-brand-dark transition-colors cursor-pointer text-center">Thanh toán ngay</a>
         @endif
         <a href="{{ route('client.dashboard') }}" class="py-3 px-6 border border-border-light text-sm font-medium text-text-secondary rounded-xl hover:bg-app-bg transition-colors cursor-pointer text-center">Về Dashboard</a>
       </div>

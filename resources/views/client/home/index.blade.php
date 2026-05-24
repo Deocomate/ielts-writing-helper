@@ -13,4 +13,5 @@
   @include('client.home.partials.social-proof-section')
   @include('client.home.partials.overview-pages-section')
   @include('client.home.partials.final-cta-section')
+  @include('client.home.partials.demo-video-modal')
 </x-client.layout.marketing-page>

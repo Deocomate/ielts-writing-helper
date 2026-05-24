@@ -48,6 +48,16 @@
 			<svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
 			Quản lý bài học
 		</a>
+		<a href="{{ route('admin.reading-materials.index') }}"
+			class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-150 cursor-pointer {{ $active === 'reading-materials' ? 'bg-slate-700/80 text-white' : 'hover:bg-slate-800/60 text-slate-400 hover:text-slate-200' }}">
+			<svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+			Học liệu mở rộng
+		</a>
+		<a href="{{ route('admin.mini-exercises.index') }}"
+			class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-150 cursor-pointer {{ $active === 'mini-exercises' ? 'bg-slate-700/80 text-white' : 'hover:bg-slate-800/60 text-slate-400 hover:text-slate-200' }}">
+			<svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-3-3v6m9-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+			Trạm sửa lỗi
+		</a>
 
 		{{-- NGƯỜI DÙNG --}}
 		<div class="pt-4 pb-1 px-3">
@@ -89,6 +99,11 @@
 			class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-150 cursor-pointer {{ $active === 'ai-assistant' ? 'bg-slate-700/80 text-white' : 'hover:bg-slate-800/60 text-slate-400 hover:text-slate-200' }}">
 			<svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18l-1.813-2.096A5.968 5.968 0 014.5 12c0-3.314 2.686-6 6-6s6 2.686 6 6-2.686 6-6 6a5.973 5.973 0 01-1.687-.244z"/><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75h.008v.008h-.008V9.75zM9.75 9.75h.008v.008H9.75V9.75zM12 12.75a2.25 2.25 0 002.25-2.25h-4.5A2.25 2.25 0 0012 12.75z"/></svg>
 			Trợ lý AI
+		</a>
+		<a href="{{ route('admin.settings.general.edit') }}"
+			class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-150 cursor-pointer {{ $active === 'general-settings' ? 'bg-slate-700/80 text-white' : 'hover:bg-slate-800/60 text-slate-400 hover:text-slate-200' }}">
+			<svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"/></svg>
+			Cấu hình chung
 		</a>
 	</nav>
 
