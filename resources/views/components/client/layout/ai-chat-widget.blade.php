@@ -145,6 +145,10 @@
         statusText: 'Sẵn sàng hỗ trợ bạn.',
         messages: [],
 
+        csrfToken() {
+          return document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+        },
+
         async initialize() {
           this.conversationId = localStorage.getItem('ai_chat_conversation_id') || this.generateConversationId();
           localStorage.setItem('ai_chat_conversation_id', this.conversationId);
@@ -221,9 +225,10 @@
           try {
             const response = await fetch(@js(route('client.ai-chat.message')), {
               method: 'POST',
+              credentials: 'same-origin',
               headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+                'X-CSRF-TOKEN': this.csrfToken(),
                 'Accept': 'application/json',
               },
               body: JSON.stringify({
@@ -274,9 +279,10 @@
           try {
             await fetch(@js(route('client.ai-chat.reset')), {
               method: 'POST',
+              credentials: 'same-origin',
               headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+                'X-CSRF-TOKEN': this.csrfToken(),
                 'Accept': 'application/json',
               },
               body: JSON.stringify({ conversation_id: oldConversationId }),

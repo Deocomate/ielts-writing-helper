@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ $title ?? 'IELTS Type & Learn — Luyện Writing thông minh với AI' }}</title>
   <meta name="description"
     content="Nền tảng luyện IELTS Writing toàn diện: Chép chính tả, Phân tích bài mẫu phong cách Grammarly, và Thi thử chấm điểm bằng AI." />
